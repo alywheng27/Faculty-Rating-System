@@ -43,6 +43,49 @@
             return $raterTypes;
         }
 
+        function getRatee($dbc1){
+            $query = "SELECT * FROM ratee JOIN rateeType ON ratee.rateeTypeID = rateeType.rateeTypeID";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $ratees = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $ratees[$count] = array(
+                    'RateeID' => $row['RateeID'],
+                    'RateeIDNumber' => $row['RateeIDNumber'],
+                    'FirstName' => $row['FirstName'],
+                    'MiddleName' => $row['MiddleName'],
+                    'Surname' => $row['Surname'],
+                    'RateeType' => $row['RateeType'],
+                    'Password' => $row['Password'],
+                );
+
+                $count++;
+            }
+
+            return $ratees;
+        }
+
+        function getRateeType($dbc1){
+            $query = "SELECT * FROM rateeType";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $rateeTypes = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $rateeTypes[$count] = array(
+                    'RateeTypeID' => $row['RateeTypeID'],
+                    'RateeType' => $row['RateeType'],
+                );
+
+                $count++;
+            }
+
+            return $rateeTypes;
+        }
+
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";
             $pdo = $dbc1->prepare($query);

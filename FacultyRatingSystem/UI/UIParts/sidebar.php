@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?elected=true" class="nav-link">
+                <a href="?ratee=true" class="nav-link">
                     <i class="fas fa-user-tie nav-icon"></i>
                     <p>Ratee</p>
                 </a>

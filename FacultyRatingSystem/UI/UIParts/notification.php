@@ -15,19 +15,19 @@
             unset($_SESSION['RaterDeleted']);
         }
 
-        function displayPartyAdded(){
-            echo 'PartyAdded';
-            unset($_SESSION['PartyAdded']);
+        function displayRateeAdded(){
+            echo 'RateeAdded';
+            unset($_SESSION['RateeAdded']);
         }
 
-        function displayPartyUpdated(){
-            echo 'PartyUpdated';
-            unset($_SESSION['PartyUpdated']);
+        function displayRateeUpdated(){
+            echo 'RateeUpdated';
+            unset($_SESSION['RateeUpdated']);
         }
 
-        function displayPartyDeleted(){
-            echo 'PartyDeleted';
-            unset($_SESSION['PartyDeleted']);
+        function displayRateeDeleted(){
+            echo 'RateeDeleted';
+            unset($_SESSION['RateeDeleted']);
         }
 
         function displayCandidateAdded(){
@@ -105,16 +105,16 @@
         $n->displayRaterDeleted();
     }
 
-    if(isset($_SESSION['PartyAdded'])){
-        $n->displayPartyAdded();
+    if(isset($_SESSION['RateeAdded'])){
+        $n->displayRateeAdded();
     }
 
-    if(isset($_SESSION['PartyUpdated'])){
-        $n->displayPartyUpdated();
+    if(isset($_SESSION['RateeUpdated'])){
+        $n->displayRateeUpdated();
     }
 
-    if(isset($_SESSION['PartyDeleted'])){
-        $n->displayPartyDeleted();
+    if(isset($_SESSION['RateeDeleted'])){
+        $n->displayRateeDeleted();
     }
 
     if(isset($_SESSION['CandidateAdded'])){

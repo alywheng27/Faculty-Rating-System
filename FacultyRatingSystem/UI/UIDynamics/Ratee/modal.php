@@ -1,19 +1,19 @@
 <?php
-    class RaterModal extends QueryRepo{
-        function displayRater($dbc1){
-            $raters = $this->getRater($dbc1);
+    class RateeModal extends QueryRepo{
+        function displayRatee($dbc1){
+            $ratees = $this->getRatee($dbc1);
             echo '
-            <div class="modal fade" id="rater">
+            <div class="modal fade" id="ratee">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Rater</h4>
+                        <h4 class="modal-title">Ratee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?raterFunction=true" method="post">
+                        <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?rateeFunction=true" method="post">
                         <div class="form-group">
                             <label for="idNumber">ID Number</label>
                             <input type="text" name="idNumber" id="idNumber" class="form-control" placeholder="ID Number" autocomplete="off">
@@ -31,15 +31,6 @@
                             <input type="text" name="surname" id="surname" class="form-control" placeholder="Last Name" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="raterType">Rater Type</label>
-                            <select name="raterType" class="form-control select2RaterType select2-success" id="raterType" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                $raterTypes = $this->getRaterType($dbc1);
-                                foreach ($raterTypes as $raterType) {
-                                    echo '<option value="'.$raterType['RaterTypeID'].'">'.$raterType['RaterType'].'</option>';
-                                }
-                            echo '</select>
-                        </div>
-                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off">
                         </div>
@@ -54,51 +45,38 @@
             </div>
             ';
 
-            foreach ($raters as $rater) {
+            foreach ($ratees as $ratee) {
                 echo '
-                    <div class="modal fade" id="edit'.$rater['RaterID'].'">
+                    <div class="modal fade" id="edit'.$ratee['RateeID'].'">
                         <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title">Update Rater</h4>
+                            <h4 class="modal-title">Update Ratee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
                             <div class="modal-body">
-                                <form role="form" id="positionQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?raterFunction=true&updateID='.$rater['RaterID'].'" method="post">
+                                <form role="form" id="positionQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?rateeFunction=true&updateID='.$ratee['RateeID'].'" method="post">
                                     <div class="form-group">
                                         <label for="idNumber">ID Number</label>
-                                        <input type="text" name="idNumber" value="'.$rater['RaterIDNumber'].'" id="idNumber" class="form-control" placeholder="ID Number" autocomplete="off">
+                                        <input type="text" name="idNumber" value="'.$ratee['RateeIDNumber'].'" id="idNumber" class="form-control" placeholder="ID Number" autocomplete="off">
                                     </div>
                                     <div class="form-group">
                                         <label for="firstName">First Name</label>
-                                        <input type="text" name="firstName" value="'.$rater['FirstName'].'" id="firstName" class="form-control" placeholder="First Name" autocomplete="off">
+                                        <input type="text" name="firstName" value="'.$ratee['FirstName'].'" id="firstName" class="form-control" placeholder="First Name" autocomplete="off">
                                     </div>
                                     <div class="form-group">
                                         <label for="middleName">Middle Name</label>
-                                        <input type="text" name="middleName" value="'.$rater['MiddleName'].'" id="middleName" class="form-control" placeholder="Middle Name" autocomplete="off">
+                                        <input type="text" name="middleName" value="'.$ratee['MiddleName'].'" id="middleName" class="form-control" placeholder="Middle Name" autocomplete="off">
                                     </div>
                                     <div class="form-group">
                                         <label for="surname">Last Name</label>
-                                        <input type="text" name="surname" value="'.$rater['Surname'].'" id="surname" class="form-control" placeholder="Surname" autocomplete="off">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="raterType'.$rater['RaterID'].'">Rater Type</label>
-                                        <select name="raterType" class="form-control select2RaterType'.$rater['RaterID'].' select2-success" id="raterType'.$rater['RaterID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                            $raterTypes = $this->getRaterType($dbc1);
-                                            foreach ($raterTypes as $raterType) {
-                                                if($raterType['RaterType'] == $rater['RaterType']) {
-                                                    echo '<option value="'.$raterType['RaterTypeID'].'" selected>'.$raterType['RaterType'].'</option>';
-                                                }else {
-                                                    echo '<option value="'.$raterType['RaterTypeID'].'">'.$raterType['RaterType'].'</option>';
-                                                }
-                                            }
-                                        echo '</select>
+                                        <input type="text" name="surname" value="'.$ratee['Surname'].'" id="surname" class="form-control" placeholder="Surname" autocomplete="off">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input type="password" name="password" value="'.$rater['Password'].'" id="password" class="form-control" placeholder="Password" autocomplete="off">
+                                        <input type="password" name="password" value="'.$ratee['Password'].'" id="password" class="form-control" placeholder="Password" autocomplete="off">
                                     </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -110,19 +88,19 @@
                         </div>
                     </div>
       
-                    <div class="modal fade" id="delete'.$rater['RaterID'].'">
+                    <div class="modal fade" id="delete'.$ratee['RateeID'].'">
                         <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title">Delete Rater</h4>
+                            <h4 class="modal-title">Delete Ratee</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
-                            <div class="modal-body">Are you sure you want to delete this rater?</div>
+                            <div class="modal-body">Are you sure you want to delete this ratee?</div>
                             <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a href="?raterFunction=true&deleteID='.$rater['RaterID'].'" class="btn btn-danger">Delete</a>
+                            <a href="?rateeFunction=true&deleteID='.$ratee['RateeID'].'" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                         </div>
@@ -134,9 +112,9 @@
         }
     }
 
-    $rm = new RaterModal();
+    $rm = new RateeModal();
 
-    $rm->displayRater($dbc1);
+    $rm->displayRatee($dbc1);
     
 
 
