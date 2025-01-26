@@ -1,18 +1,18 @@
 <?php
     class Notification{
-        function displayPositionAdded(){
-            echo 'PositionAdded';
-            unset($_SESSION['PositionAdded']);
+        function displayRaterAdded(){
+            echo 'RaterAdded';
+            unset($_SESSION['RaterAdded']);
         }
 
-        function displayPositionUpdated(){
-            echo 'PositionUpdated';
-            unset($_SESSION['PositionUpdated']);
+        function displayRaterUpdated(){
+            echo 'RaterUpdated';
+            unset($_SESSION['RaterUpdated']);
         }
 
-        function displayPositionDeleted(){
-            echo 'PositionDeleted';
-            unset($_SESSION['PositionDeleted']);
+        function displayRaterDeleted(){
+            echo 'RaterDeleted';
+            unset($_SESSION['RaterDeleted']);
         }
 
         function displayPartyAdded(){
@@ -93,16 +93,16 @@
 
     $n = new Notification();
 
-    if(isset($_SESSION['PositionAdded'])){
-        $n->displayPositionAdded();
+    if(isset($_SESSION['RaterAdded'])){
+        $n->displayRaterAdded();
     }
 
-    if(isset($_SESSION['PositionUpdated'])){
-        $n->displayPositionUpdated();
+    if(isset($_SESSION['RaterUpdated'])){
+        $n->displayRaterUpdated();
     }
 
-    if(isset($_SESSION['PositionDeleted'])){
-        $n->displayPositionDeleted();
+    if(isset($_SESSION['RaterDeleted'])){
+        $n->displayRaterDeleted();
     }
 
     if(isset($_SESSION['PartyAdded'])){

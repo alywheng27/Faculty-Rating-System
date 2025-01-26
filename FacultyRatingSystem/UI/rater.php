@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
   <?php 
-    include 'IntranetVotingSystem/UI/UIParts/head.php'
+    include 'FacultyRatingSystem/UI/UIParts/head.php'
    ?>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-  <?php include 'IntranetVotingSystem/UI/UIParts/navbar.php' ?>
+  <?php include 'FacultyRatingSystem/UI/UIParts/navbar.php' ?>
 
-  <?php include 'IntranetVotingSystem/UI/UIParts/sidebar.php' ?>
+  <?php include 'FacultyRatingSystem/UI/UIParts/sidebar.php' ?>
 
   <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Voter</h1>
+            <h1 class="m-0 text-dark">Rater</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Voter</li>
+              <li class="breadcrumb-item active">Rater</li>
             </ol>
           </div>
         </div>
@@ -33,33 +33,33 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Voter</h3>
+              <h3 class="card-title">Rater</h3>
             </div>
             
             <div class="card-body table-responsive">
-              <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#voter">Add Voter</button>
+              <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#rater">Add Rater</button>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>ID Number</th>
-                  <th>Voter</th>
-                  <th>Has Voted?</th>
+                  <th>Name</th>
+                  <th>Rater Type</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <?php include 'IntranetVotingSystem/UI/UIDynamics/Voter/voter.php'; ?>
+                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Rater/rater.php'; ?>
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>ID Number</th>
-                  <th>Voter</th>
-                  <th>Has Voted?</th>
+                  <th>Name</th>
+                  <th>Rater Type</th>
                   <th>Action</th>
                 </tr>
                 </tfoot>
               </table>
-            </div>
+              </div>
           </div>
       </div>
     </div>
@@ -72,44 +72,56 @@
     </div>
   </aside>
 
-  <?php include 'IntranetVotingSystem/UI/UIParts/footer.php' ?>
+  <?php include 'FacultyRatingSystem/UI/UIParts/footer.php' ?>
 </div>
 
-<?php include 'IntranetVotingSystem/UI/UIParts/modal.php' ?>
-<?php include 'IntranetVotingSystem/UI/UIDynamics/Voter/modal.php'; ?>
+<?php include 'FacultyRatingSystem/UI/UIParts/modal.php' ?>
+<?php include 'FacultyRatingSystem/UI/UIDynamics/Rater/modal.php'; ?>
 
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="IntranetVotingSystem/Skin/plugins/jquery/jquery.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="IntranetVotingSystem/Skin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
-<script src="IntranetVotingSystem/Skin/plugins/select2/js/select2.full.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/select2/js/select2.full.min.js"></script>
 <!-- SweetAlert2 -->
-<script src="IntranetVotingSystem/Skin/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
-<script src="IntranetVotingSystem/Skin/plugins/toastr/toastr.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/toastr/toastr.min.js"></script>
 <!-- DataTables -->
-<script src="IntranetVotingSystem/Skin/plugins/datatables/jquery.dataTables.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables/jquery.dataTables.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <!-- Howler -->
-<script src="IntranetVotingSystem/Skin/plugins/howler/howler.core.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/howler/howler.core.js"></script>
 <!-- DataTables  & Plugins -->
-<script src="IntranetVotingSystem/Skin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/jszip/jszip.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="IntranetVotingSystem/Skin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/jszip/jszip.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 
 <!-- AdminLTE App -->
-<script src="IntranetVotingSystem/Skin/dist/js/adminlte.min.js"></script>
+<script src="FacultyRatingSystem/Skin/dist/js/adminlte.min.js"></script>
+
+<script>
+  //Initialize Select2 Elements
+  $('.select2RaterType').select2();
+
+  <?php include 'FacultyRatingSystem/UI/UIDynamics/Rater/dependency.php'; ?>
+
+  //Initialize Select2 Elements
+  $('.select2bs4').select2({
+      theme: 'bootstrap4'
+  })
+</script>
 
 <script>
   $(function () {
@@ -164,7 +176,7 @@
       type: "get",
       url: '?notification=true',
       success: function(data){
-        if(data == 'VoterAdded'){
+        if(data == 'RaterAdded'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -172,10 +184,10 @@
             timer: 3000
           });
 
-          toastr.success('Voter Added.');
+          toastr.success('Rater Added.');
         }
 
-        if(data == 'VoterUpdated'){
+        if(data == 'RaterUpdated'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -183,10 +195,10 @@
             timer: 3000
           });
 
-          toastr.info('Voter Updated.');
+          toastr.info('Rater Updated.');
         }
 
-        if(data == 'VoterDeleted'){
+        if(data == 'RaterDeleted'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -194,7 +206,7 @@
             timer: 3000
           });
 
-          toastr.error('Voter Deleted.');
+          toastr.error('Rater Deleted.');
         }
 
       }

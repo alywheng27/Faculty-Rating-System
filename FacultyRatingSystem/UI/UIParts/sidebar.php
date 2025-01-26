@@ -16,7 +16,7 @@
             </li>  
             <li class="nav-header">RATER AND RATEE</li>
             <li class="nav-item">
-                <a href="?elected=true" class="nav-link">
+                <a href="?rater=true" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
                     <p>Rater</p>
                 </a>

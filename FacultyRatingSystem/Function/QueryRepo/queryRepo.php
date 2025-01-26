@@ -1,89 +1,46 @@
 <?php
     class QueryRepo {
-        function getPosition($dbc1, $id){
-            $query = "SELECT * FROM position";
-            if($id != NULL) {
-                $query = $query . " WHERE ID = :id";
-            }
-            $query = $query . " ORDER BY Decree";
+        function getRater($dbc1){
+            $query = "SELECT * FROM rater JOIN raterType ON rater.raterTypeID = raterType.raterTypeID";
             $pdo = $dbc1->prepare($query);
-            if($id != NULL) {
-                $pdo->bindParam(':id', $id);
-            }
-            $pdo->execute();
-
-            $positions = [];
-            $count = 0;
-            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $positions[$count] = array(
-                    'ID' => $row['ID'],
-                    'Name' => $row['Name'],
-                    'Decree' => $row['Decree'],
-                    'Count' => $row['Count']
-                );
-
-                $count++;
-            }
-
-            return $positions;
-        }
-
-        function getParty($dbc1, $id){
-            $query = "SELECT * FROM party";
-            if($id != NULL) {
-                $query = $query . " WHERE ID = :id";
-            }
-            $query = $query . " ORDER BY ID, Name";
-            $pdo = $dbc1->prepare($query);
-            if($id != NULL) {
-                $pdo->bindParam(':id', $id);
-            }
             $pdo->execute();
             
-            $parties = [];
+            $raters = [];
             $count = 0;
             while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $parties[$count] = array(
-                    'ID' => $row['ID'],
-                    'Name' => $row['Name'],
-                    'LogoURL' => $row['LogoURL'],
+                $raters[$count] = array(
+                    'RaterID' => $row['RaterID'],
+                    'RaterIDNumber' => $row['RaterIDNumber'],
+                    'FirstName' => $row['FirstName'],
+                    'MiddleName' => $row['MiddleName'],
+                    'Surname' => $row['Surname'],
+                    'RaterType' => $row['RaterType'],
+                    'Password' => $row['Password'],
                 );
 
                 $count++;
             }
 
-            return $parties;
+            return $raters;
         }
 
-        function getCandidate($dbc1, $positionID, $count){
-            $query = "SELECT * FROM candidateview ";
-            if($positionID != NULL AND $count != NULL) {
-                $query = $query . " WHERE PositionID = :positionID ORDER BY Vote DESC, Name limit $count ";
-            }else {
-                $query = $query . " ORDER BY Decree, Vote DESC, Name";
-            }
+        function getRaterType($dbc1){
+            $query = "SELECT * FROM raterType";
             $pdo = $dbc1->prepare($query);
-            if($positionID != NULL AND $count != NULL) {
-                $pdo->bindParam(':positionID', $positionID);
-            }
             $pdo->execute();
             
-            $candidates = [];
+            $raterTypes = [];
             $count = 0;
             while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $candidates[$count] = array(
-                    'ID' => $row['ID'],
-                    'Name' => $row['Name'],
-                    'PhotoURL' => $row['PhotoURL'],
-                    'PositionID' => $row['PositionID'],
-                    'PartyID' => $row['PartyID'],
-                    'Vote' => $row['Vote'],
+                $raterTypes[$count] = array(
+                    'RaterTypeID' => $row['RaterTypeID'],
+                    'RaterType' => $row['RaterType'],
                 );
 
                 $count++;
             }
 
-            return $candidates;
+            return $raterTypes;
         }
 
         function getVoter($dbc1){
