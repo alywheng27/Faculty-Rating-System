@@ -29,52 +29,52 @@
             </li>
             <li class="nav-header">CLASS AND SUBJECT</li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?subject=true" class="nav-link">
                     <i class="fas fa-book nav-icon"></i>
                     <p>Subject</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?aysemester=true" class="nav-link">
                     <i class="fas fa-business-time nav-icon"></i>
                     <p>A.Y. and Semester</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?class=true" class="nav-link">
                     <i class="fas fa-chalkboard-teacher nav-icon"></i>
                     <p>Class</p>
                 </a>
             </li>
             <li class="nav-header">QUESTION</li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?category=true" class="nav-link">
                     <i class="fas fa-layer-group nav-icon"></i>
                     <p>Category</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?question=true" class="nav-link">
                     <i class="fas fa-question nav-icon"></i>
                     <p>Question</p>
                 </a>
             </li>
             <li class="nav-header">ENROLLMENT AND RESULT</li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?enrollment=true" class="nav-link">
                     <i class="fas fa-registered nav-icon"></i>
                     <p>Enrollment</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?result=true" class="nav-link">
                     <i class="fas fa-clipboard-list nav-icon"></i>
                     <p>Resut</p>
                 </a>
             </li>
             <li class="nav-header">CONTROL PANEL</li>
             <li class="nav-item">
-                <a href="?user=true" class="nav-link">
+                <a href="?admin=true" class="nav-link">
                     <i class="fas fa-user-cog nav-icon"></i>
                     <p>Admin</p>
                 </a>

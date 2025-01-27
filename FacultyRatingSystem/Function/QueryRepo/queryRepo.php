@@ -86,6 +86,26 @@
             return $rateeTypes;
         }
 
+        function getSubject($dbc1){
+            $query = "SELECT * FROM subject ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $subjects = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $subjects[$count] = array(
+                    'SubjectID' => $row['SubjectID'],
+                    'Subject' => $row['Subject'],
+                    'SubjectDescription' => $row['SubjectDescription'],
+                );
+
+                $count++;
+            }
+
+            return $subjects;
+        }
+
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";
             $pdo = $dbc1->prepare($query);

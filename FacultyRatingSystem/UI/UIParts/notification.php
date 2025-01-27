@@ -30,19 +30,19 @@
             unset($_SESSION['RateeDeleted']);
         }
 
-        function displayCandidateAdded(){
-            echo 'CandidateAdded';
-            unset($_SESSION['CandidateAdded']);
+        function displaySubjectAdded(){
+            echo 'SubjectAdded';
+            unset($_SESSION['SubjectAdded']);
         }
 
-        function displayCandidateUpdated(){
-            echo 'CandidateUpdated';
-            unset($_SESSION['CandidateUpdated']);
+        function displaySubjectUpdated(){
+            echo 'SubjectUpdated';
+            unset($_SESSION['SubjectUpdated']);
         }
 
-        function displayCandidateDeleted(){
-            echo 'CandidateDeleted';
-            unset($_SESSION['CandidateDeleted']);
+        function displaySubjectDeleted(){
+            echo 'SubjectDeleted';
+            unset($_SESSION['SubjectDeleted']);
         }
 
         function displayVoterAdded(){
@@ -117,16 +117,16 @@
         $n->displayRateeDeleted();
     }
 
-    if(isset($_SESSION['CandidateAdded'])){
-        $n->displayCandidateAdded();
+    if(isset($_SESSION['SubjectAdded'])){
+        $n->displaySubjectAdded();
     }
 
-    if(isset($_SESSION['CandidateUpdated'])){
-        $n->displayCandidateUpdated();
+    if(isset($_SESSION['SubjectUpdated'])){
+        $n->displaySubjectUpdated();
     }
 
-    if(isset($_SESSION['CandidateDeleted'])){
-        $n->displayCandidateDeleted();
+    if(isset($_SESSION['SubjectDeleted'])){
+        $n->displaySubjectDeleted();
     }
 
     if(isset($_SESSION['VoterAdded'])){

@@ -17,6 +17,10 @@
             include 'FacultyRatingSystem/UI/ratee.php';
         }
 
+        public function subject($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/subject.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -25,6 +29,10 @@
 
         public function rateeFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/ratee.php';
+        }
+
+        public function subjectFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/subject.php';
         }
 
         public function loginFunction($dbc1, $dbc2) {
@@ -125,6 +133,8 @@
         $main->rater($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['ratee'])){
         $main->ratee($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['subject'])){
+        $main->subject($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -134,6 +144,8 @@
         $main->raterFunction($dbc1, $dbc2);
     }else if(isset($_GET['rateeFunction'])){
         $main->rateeFunction($dbc1, $dbc2);
+    }else if(isset($_GET['subjectFunction'])){
+        $main->subjectFunction($dbc1, $dbc2);
     }
 
     // Dynamics
