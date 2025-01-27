@@ -30,34 +30,39 @@
             unset($_SESSION['RateeDeleted']);
         }
 
-        function displaySubjectAdded(){
-            echo 'SubjectAdded';
-            unset($_SESSION['SubjectAdded']);
+        function displayAcademicYearAdded(){
+            echo 'AcademicYearAdded';
+            unset($_SESSION['AcademicYearAdded']);
         }
 
-        function displaySubjectUpdated(){
-            echo 'SubjectUpdated';
-            unset($_SESSION['SubjectUpdated']);
+        function displayAcademicYearUpdated(){
+            echo 'AcademicYearUpdated';
+            unset($_SESSION['AcademicYearUpdated']);
         }
 
-        function displaySubjectDeleted(){
-            echo 'SubjectDeleted';
-            unset($_SESSION['SubjectDeleted']);
+        function displayAcademicYearDeleted(){
+            echo 'AcademicYearDeleted';
+            unset($_SESSION['AcademicYearDeleted']);
         }
 
-        function displayVoterAdded(){
-            echo 'VoterAdded';
-            unset($_SESSION['VoterAdded']);
+        function displaySemesterAdded(){
+            echo 'SemesterAdded';
+            unset($_SESSION['SemesterAdded']);
         }
 
-        function displayVoterUpdated(){
-            echo 'VoterUpdated';
-            unset($_SESSION['VoterUpdated']);
+        function displaySemesterUpdated(){
+            echo 'SemesterUpdated';
+            unset($_SESSION['SemesterUpdated']);
         }
 
-        function displayVoterDeleted(){
-            echo 'VoterDeleted';
-            unset($_SESSION['VoterDeleted']);
+        function displaySemesterDeleted(){
+            echo 'SemesterDeleted';
+            unset($_SESSION['SemesterDeleted']);
+        }
+
+        function displayAYSemesterSet(){
+            echo 'AYSemesterSet';
+            unset($_SESSION['AYSemesterSet']);
         }
 
         function displayInvalidCredentials(){
@@ -117,28 +122,32 @@
         $n->displayRateeDeleted();
     }
 
-    if(isset($_SESSION['SubjectAdded'])){
-        $n->displaySubjectAdded();
+    if(isset($_SESSION['AcademicYearAdded'])){
+        $n->displayAcademicYearAdded();
     }
 
-    if(isset($_SESSION['SubjectUpdated'])){
-        $n->displaySubjectUpdated();
+    if(isset($_SESSION['AcademicYearUpdated'])){
+        $n->displayAcademicYearUpdated();
     }
 
-    if(isset($_SESSION['SubjectDeleted'])){
-        $n->displaySubjectDeleted();
+    if(isset($_SESSION['AcademicYearDeleted'])){
+        $n->displayAcademicYearDeleted();
     }
 
-    if(isset($_SESSION['VoterAdded'])){
-        $n->displayVoterAdded();
+    if(isset($_SESSION['SemesterAdded'])){
+        $n->displaySemesterAdded();
     }
 
-    if(isset($_SESSION['VoterUpdated'])){
-        $n->displayVoterUpdated();
+    if(isset($_SESSION['SemesterUpdated'])){
+        $n->displaySemesterUpdated();
     }
 
-    if(isset($_SESSION['VoterDeleted'])){
-        $n->displayVoterDeleted();
+    if(isset($_SESSION['SemesterDeleted'])){
+        $n->displaySemesterDeleted();
+    }
+
+    if(isset($_SESSION['AYSemesterSet'])){
+        $n->displayAYSemesterSet();
     }
 
     if(isset($_SESSION['InvalidCredentials'])){

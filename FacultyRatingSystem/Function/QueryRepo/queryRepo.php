@@ -106,6 +106,51 @@
             return $subjects;
         }
 
+        function getAcademicYear($dbc1, $active){
+            $query = "SELECT * FROM AcademicYear";
+            if($active == true){
+                $query = $query . " WHERE IsActive = 1 ";
+            }
+            $query = $query . " ORDER BY AcademicYear DESC ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $academicYears = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $academicYears[$count] = array(
+                    'AcademicYearID' => $row['AcademicYearID'],
+                    'AcademicYear' => $row['AcademicYear'],
+                );
+
+                $count++;
+            }
+
+            return $academicYears;
+        }
+
+        function getSemester($dbc1, $active){
+            $query = "SELECT * FROM Semester ";
+            if($active == true){
+                $query = $query . " WHERE IsActive = 1 ";
+            }
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $semesters = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $semesters[$count] = array(
+                    'SemesterID' => $row['SemesterID'],
+                    'Semester' => $row['Semester'],
+                );
+
+                $count++;
+            }
+
+            return $semesters;
+        }
+
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";
             $pdo = $dbc1->prepare($query);

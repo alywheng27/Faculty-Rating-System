@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?aysemester=true" class="nav-link">
+                <a href="?AYSemester=true" class="nav-link">
                     <i class="fas fa-business-time nav-icon"></i>
                     <p>A.Y. and Semester</p>
                 </a>
