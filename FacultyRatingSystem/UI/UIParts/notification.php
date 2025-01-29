@@ -65,6 +65,21 @@
             unset($_SESSION['AYSemesterSet']);
         }
 
+        function displayClassAdded(){
+            echo 'ClassAdded';
+            unset($_SESSION['ClassAdded']);
+        }
+
+        function displayClassUpdated(){
+            echo 'ClassUpdated';
+            unset($_SESSION['ClassUpdated']);
+        }
+
+        function displayClassDeleted(){
+            echo 'ClassDeleted';
+            unset($_SESSION['ClassDeleted']);
+        }
+
         function displayInvalidCredentials(){
             echo 'InvalidCredentials';
             unset($_SESSION['InvalidCredentials']);
@@ -144,6 +159,18 @@
 
     if(isset($_SESSION['SemesterDeleted'])){
         $n->displaySemesterDeleted();
+    }
+
+    if(isset($_SESSION['ClassAdded'])){
+        $n->displayClassAdded();
+    }
+
+    if(isset($_SESSION['ClassUpdated'])){
+        $n->displayClassUpdated();
+    }
+
+    if(isset($_SESSION['ClassDeleted'])){
+        $n->displayClassDeleted();
     }
 
     if(isset($_SESSION['AYSemesterSet'])){

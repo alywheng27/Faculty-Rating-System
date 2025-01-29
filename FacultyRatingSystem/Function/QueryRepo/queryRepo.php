@@ -151,6 +151,38 @@
             return $semesters;
         }
 
+        function getClass($dbc1){
+            $query = "SELECT * FROM class 
+                JOIN subject ON subject.SubjectID = class.SubjectID
+                JOIN ratee ON ratee.RateeID = class.RateeID
+                JOIN academicyear ON academicyear.AcademicYearID = class.AcademicYearID
+                JOIN semester ON semester.SemesterID = class.SemesterID ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $classes = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $classes[$count] = array(
+                    'ClassID' => $row['ClassID'],
+                    'Class' => $row['Class'],
+                    'SubjectID' => $row['SubjectID'],
+                    'Subject' => $row['Subject'],
+                    'RateeID' => $row['RateeID'],
+                    'FirstName' => $row['FirstName'],
+                    'Surname' => $row['Surname'],
+                    'AcademicYearID' => $row['AcademicYearID'],
+                    'AcademicYear' => $row['AcademicYear'],
+                    'SemesterID' => $row['SemesterID'],
+                    'Semester' => $row['Semester'],
+                );
+
+                $count++;
+            }
+
+            return $classes;
+        }
+
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";
             $pdo = $dbc1->prepare($query);
