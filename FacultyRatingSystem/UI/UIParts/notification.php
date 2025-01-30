@@ -65,6 +65,25 @@
             unset($_SESSION['AYSemesterSet']);
         }
 
+        function displayCategoryAdded(){
+            echo 'CategoryAdded';
+            unset($_SESSION['CategoryAdded']);
+        }
+
+        function displayCategoryUpdated(){
+            echo 'CategoryUpdated';
+            unset($_SESSION['CategoryUpdated']);
+        }
+
+        function displayCategoryDeleted(){
+            echo 'CategoryDeleted';
+            unset($_SESSION['CategoryDeleted']);
+        }
+
+        function displayCategorySet(){
+            echo 'CategorySet';
+        }
+
         function displayClassAdded(){
             echo 'ClassAdded';
             unset($_SESSION['ClassAdded']);
@@ -175,6 +194,22 @@
 
     if(isset($_SESSION['AYSemesterSet'])){
         $n->displayAYSemesterSet();
+    }
+
+    if(isset($_SESSION['CategoryAdded'])){
+        $n->displayCategoryAdded();
+    }
+
+    if(isset($_SESSION['CategoryUpdated'])){
+        $n->displayCategoryUpdated();
+    }
+
+    if(isset($_SESSION['CategoryDeleted'])){
+        $n->displayCategoryDeleted();
+    }
+
+    if(isset($_GET['CategorySet'])){
+        $n->displayCategorySet();
     }
 
     if(isset($_SESSION['InvalidCredentials'])){

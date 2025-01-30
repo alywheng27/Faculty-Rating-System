@@ -29,6 +29,10 @@
             include 'FacultyRatingSystem/UI/class.php';
         }
 
+        public function category($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/category.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -51,6 +55,10 @@
             include 'FacultyRatingSystem/Function/class.php';
         }
 
+        public function categoryFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/category.php';
+        }
+
         public function loginFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/login.php';
         }
@@ -61,6 +69,10 @@
         }
 
         // Dynamics
+
+        public function categoryOrder($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/Category/categoryOrder.php';
+        }
 
         public function notification($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIParts/notification.php';
@@ -155,6 +167,8 @@
         $main->AYSemester($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['class'])){
         $main->class($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['category'])){
+        $main->category($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -170,10 +184,14 @@
         $main->AYSemesterFunction($dbc1, $dbc2);
     }else if(isset($_GET['classFunction'])){
         $main->classFunction($dbc1, $dbc2);
+    }else if(isset($_GET['categoryFunction'])){
+        $main->categoryFunction($dbc1, $dbc2);
     }
 
     // Dynamics
-
+    else if(isset($_GET['categoryOrder'])){
+        $main->categoryOrder($dbc1, $dbc2);
+    }
 
     // Parts
     else if(isset($_GET['notification'])){

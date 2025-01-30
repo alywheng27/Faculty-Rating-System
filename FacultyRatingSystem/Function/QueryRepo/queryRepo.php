@@ -183,6 +183,35 @@
             return $classes;
         }
 
+        function getCategory($dbc1, $order){
+            $query = "SELECT * FROM category ";
+            if($order != null){
+                $query = $query . " WHERE category.Order = :order ";
+            }
+            $query = $query . " ORDER BY category.Order ";
+            
+            $pdo = $dbc1->prepare($query);
+            if($order != null){
+                $pdo->bindParam(':order', $order);
+            }
+            $pdo->execute();
+            
+            $categories = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $categories[$count] = array(
+                    'CategoryID' => $row['CategoryID'],
+                    'Category' => $row['Category'],
+                    'Order' => $row['Order'],
+                );
+
+                $count++;
+            }
+
+            return $categories;
+        }
+
+
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";
             $pdo = $dbc1->prepare($query);
