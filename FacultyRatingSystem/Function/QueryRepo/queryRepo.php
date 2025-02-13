@@ -211,6 +211,41 @@
             return $categories;
         }
 
+        function getQuestion($dbc1, $categoryID, $questionOrder){
+            $query = "SELECT * FROM question ";
+            if($categoryID != null){
+                $query = $query . " WHERE CategoryID = :categoryID ";
+            }
+            if($questionOrder != null){
+                $query = $query . " AND question.Order = :questionOrder ";
+            }
+            $query = $query . " ORDER BY CategoryID, question.Order ";
+            
+            $pdo = $dbc1->prepare($query);
+            if($categoryID != null){
+                $pdo->bindParam(':categoryID', $categoryID);
+            }
+            if($questionOrder != null){
+                $pdo->bindParam(':questionOrder', $questionOrder);
+            }
+            $pdo->execute();
+            
+            $questions = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $questions[$count] = array(
+                    'QuestionID' => $row['QuestionID'],
+                    'Question' => $row['Question'],
+                    'CategoryID' => $row['CategoryID'],
+                    'Order' => $row['Order'],
+                );
+
+                $count++;
+            }
+
+            return $questions;
+        }
+
 
         function getVoter($dbc1){
             $query = "SELECT * FROM voter ORDER BY Name";

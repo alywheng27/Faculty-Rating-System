@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Category</h1>
+            <h1 class="m-0 text-dark">Question</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Question</li>
             </ol>
           </div>
         </div>
@@ -33,15 +33,13 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Category</h3>
+              <h3 class="card-title">Question</h3>
             </div>
             
             <div class="card-body table-responsive">
-                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#category">Add Category</button>
-                  <button type="submit" class="btn btn-primary mb-3 float-right mr-2" id="setCategory">Set Category</button>
-                <div id="sortable1" class="list-group col">
-                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Category/category.php'; ?>
-                </div>
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#question">Add Question</button>
+                  <button type="submit" class="btn btn-primary mb-3 float-right mr-2" id="setQuestion">Set Question</button>
+                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Question/question.php'; ?>
             </div>
           </div>
       </div>
@@ -59,7 +57,7 @@
 </div>
 
 <?php include 'FacultyRatingSystem/UI/UIParts/modal.php' ?>
-<?php include 'FacultyRatingSystem/UI/UIDynamics/Category/modal.php'; ?>
+<?php include 'FacultyRatingSystem/UI/UIDynamics/Question/modal.php'; ?>
 
 <!-- REQUIRED SCRIPTS -->
 
@@ -101,9 +99,11 @@
 
 <script>
   //Initialize Select2 Elements
+  $('.select2Category').select2();
+
   $('.select2Order').select2();
 
-  <?php include 'FacultyRatingSystem/UI/UIDynamics/Category/dependency.php'; ?>
+  <?php include 'FacultyRatingSystem/UI/UIDynamics/Question/dependency.php'; ?>
 
   //Initialize Select2 Elements
   $('.select2bs4').select2({
@@ -164,7 +164,7 @@
       type: "get",
       url: '?notification=true',
       success: function(data){
-        if(data == 'CategoryAdded'){
+        if(data == 'QuestionAdded'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -172,10 +172,10 @@
             timer: 3000
           });
 
-          toastr.success('Category Added.');
+          toastr.success('Question Added.');
         }
 
-        if(data == 'CategoryUpdated'){
+        if(data == 'QuestionUpdated'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -183,10 +183,10 @@
             timer: 3000
           });
 
-          toastr.info('Category Updated.');
+          toastr.info('Question Updated.');
         }
 
-        if(data == 'CategoryDeleted'){
+        if(data == 'QuestionDeleted'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -194,7 +194,7 @@
             timer: 3000
           });
 
-          toastr.error('Category Deleted.');
+          toastr.error('Question Deleted.');
         }
 
       }
@@ -202,40 +202,38 @@
 </script>
 
 <script>
-  $('#sortable1').sortable({
-        group: 'list',
-        swap: true,
-        swapClass: "highlight",
-        animation: 200,
-        ghostClass: 'ghost',
-  })
+  // $("#sortable1").sortable({
+  //       group: "list",
+  //       animation: 200,
+  //       ghostClass: "ghost",
+  // })
 
-  $('#setCategory').click(function() {
-    let orderData = $('#sortable1').sortable('toArray');
+  // $("#setQuestion").click(function() {
+  //   let orderData = $("#sortable1").sortable("toArray");
 
-    $.ajax({
-      type: "POST",
-      url: '?categoryOrder=true',
-      data: {order: orderData},
-    });
+    // $.ajax({
+    //   type: "POST",
+    //   url: "?questionOrder=true",
+    //   data: {order: orderData},
+    // });
 
-    $.ajax({
-      type: "get",
-      url: '?notification=true&CategorySet=true',
-      success: function(data){
-        if(data == 'CategorySet'){
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000
-          });
+    // $.ajax({
+    //   type: "get",
+    //   url: "?notification=true&QuestionSet=true",
+    //   success: function(data){
+    //     if(data == "QuestionSet"){
+    //       const Toast = Swal.mixin({
+    //         toast: true,
+    //         position: "center",
+    //         showConfirmButton: false,
+    //         timer: 3000
+    //       });
 
-          toastr.success('Category Set.');
-        }
-      }
-    });
-  })
+    //       toastr.success("Question Set.");
+    //     }
+    //   }
+    // });
+  // })
 </script>
 
 

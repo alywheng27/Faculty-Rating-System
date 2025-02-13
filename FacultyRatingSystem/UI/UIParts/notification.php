@@ -99,6 +99,25 @@
             unset($_SESSION['ClassDeleted']);
         }
 
+        function displayQuestionAdded(){
+            echo 'QuestionAdded';
+            unset($_SESSION['QuestionAdded']);
+        }
+
+        function displayQuestionUpdated(){
+            echo 'QuestionUpdated';
+            unset($_SESSION['QuestionUpdated']);
+        }
+
+        function displayQuestionDeleted(){
+            echo 'QuestionDeleted';
+            unset($_SESSION['QuestionDeleted']);
+        }
+
+        function displayQuestionSet(){
+            echo 'QuestionSet';
+        }
+
         function displayInvalidCredentials(){
             echo 'InvalidCredentials';
             unset($_SESSION['InvalidCredentials']);
@@ -210,6 +229,22 @@
 
     if(isset($_GET['CategorySet'])){
         $n->displayCategorySet();
+    }
+
+    if(isset($_SESSION['QuestionAdded'])){
+        $n->displayQuestionAdded();
+    }
+
+    if(isset($_SESSION['QuestionUpdated'])){
+        $n->displayQuestionUpdated();
+    }
+
+    if(isset($_SESSION['QuestionDeleted'])){
+        $n->displayQuestionDeleted();
+    }
+
+    if(isset($_GET['QuestionSet'])){
+        $n->displayQuestionSet();
     }
 
     if(isset($_SESSION['InvalidCredentials'])){
