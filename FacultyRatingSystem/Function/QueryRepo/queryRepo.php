@@ -151,13 +151,19 @@
             return $semesters;
         }
 
-        function getClass($dbc1){
+        function getClass($dbc1, $active){
             $query = "SELECT * FROM class 
                 JOIN subject ON subject.SubjectID = class.SubjectID
                 JOIN ratee ON ratee.RateeID = class.RateeID
                 JOIN academicyear ON academicyear.AcademicYearID = class.AcademicYearID
                 JOIN semester ON semester.SemesterID = class.SemesterID ";
+            if($active != null){
+                $query = $query . " WHERE academicyear.IsActive = :active AND semester.IsActive = :active ";
+            }
             $pdo = $dbc1->prepare($query);
+            if($active != null){
+                $pdo->bindParam(':active', $active);
+            }
             $pdo->execute();
             
             $classes = [];
@@ -246,89 +252,30 @@
             return $questions;
         }
 
-
-        function getVoter($dbc1){
-            $query = "SELECT * FROM voter ORDER BY Name";
+        function getEnrollment($dbc1){
+            $query = "SELECT * FROM enrollment
+                        JOIN rater ON rater.RaterID = enrollment.RaterID 
+                        JOIN class ON class.ClassID = enrollment.ClassID ";
             $pdo = $dbc1->prepare($query);
             $pdo->execute();
             
-            $voters = [];
+            $enrollments = [];
             $count = 0;
             while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $voters[$count] = array(
-                    'ID' => $row['ID'],
-                    'IDNumber' => $row['IDNumber'],
-                    'Name' => $row['Name'],
-                    'Password' => $row['Password'],
-                    'HasVoted' => $row['HasVoted'],
-                );
-
-                $count++;
-            }
-
-            return $voters;
-        }
-
-        function getUser($dbc1){
-            $query = "SELECT * FROM user ORDER BY FirstName";
-            $pdo = $dbc1->prepare($query);
-            $pdo->execute();
-            
-            $users = [];
-            $count = 0;
-            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $users[$count] = array(
-                    'ID' => $row['ID'],
+                $enrollments[$count] = array(
+                    'EnrollmentID' => $row['EnrollmentID'],
+                    'RaterID' => $row['RaterID'],
                     'FirstName' => $row['FirstName'],
+                    'MiddleName' => $row['MiddleName'],
                     'Surname' => $row['Surname'],
-                    'Username' => $row['Username'],
-                    'Password' => $row['Password'],
+                    'ClassID' => $row['ClassID'],
+                    'Class' => $row['Class'],
                 );
 
                 $count++;
             }
 
-            return $users;
-        }
-
-        function getTableTotalRowCount($dbc1) {
-            $query = "SELECT * FROM tablestotalrowcountview ";
-            $pdo = $dbc1->prepare($query);
-            $pdo->execute();
-            
-            $total = [];
-            $count = 0;
-            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $total[$count] = array(
-                    'PositionCount' => $row['PositionCount'],
-                    'PartyCount' => $row['PartyCount'],
-                    'CandidateCount' => $row['CandidateCount'],
-                    'VoterCount' => $row['VoterCount'],
-                );
-
-                $count++;
-            }
-
-            return $total;
-        }
-
-        function getParticipant($dbc1) {
-            $query = "SELECT * FROM participantview ";
-            $pdo = $dbc1->prepare($query);
-            $pdo->execute();
-            
-            $participants = [];
-            $count = 0;
-            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
-                $participants[$count] = array(
-                    'VoterCount' => $row['VoterCount'],
-                    'NonVoterCount' => $row['NonVoterCount'],
-                );
-
-                $count++;
-            }
-
-            return $participants;
+            return $enrollments;
         }
 
         function key(){

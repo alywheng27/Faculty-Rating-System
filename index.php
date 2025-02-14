@@ -37,6 +37,10 @@
             include 'FacultyRatingSystem/UI/question.php';
         }
 
+        public function enrollment($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/enrollment.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -65,6 +69,10 @@
 
         public function questionFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/question.php';
+        }
+
+        public function enrollmentFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/enrollment.php';
         }
 
 
@@ -184,6 +192,8 @@
         $main->category($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['question'])){
         $main->question($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['enrollment'])){
+        $main->enrollment($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -203,6 +213,8 @@
         $main->categoryFunction($dbc1, $dbc2);
     }else if(isset($_GET['questionFunction'])){
         $main->questionFunction($dbc1, $dbc2);
+    }else if(isset($_GET['enrollmentFunction'])){
+        $main->enrollmentFunction($dbc1, $dbc2);
     }
 
     // Dynamics

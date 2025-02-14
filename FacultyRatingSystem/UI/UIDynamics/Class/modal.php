@@ -1,7 +1,7 @@
 <?php
     class ClassModal extends QueryRepo{
         function displayClass($dbc1){
-            $classes = $this->getClass($dbc1);
+            $classes = $this->getClass($dbc1, null);
             echo '
             <div class="modal fade" id="class">
                 <div class="modal-dialog modal-md">
@@ -83,8 +83,8 @@
                                         <input type="text" name="class" id="class" class="form-control" placeholder="Class" value="'.$class['Class'].'" autocomplete="off">
                                     </div>
                                     <div class="form-group">
-                                        <label for="subject">Subject</label>
-                                        <select name="subject" class="form-control select2Subject'.$class['Class'].' select2-success" id="subject" data-dropdown-css-class="select2-success" style="width: 100%;">';
+                                        <label for="subject'.$class['ClassID'].'">Subject</label>
+                                        <select name="subject" class="form-control select2Subject'.$class['ClassID'].' select2-success" id="subject'.$class['ClassID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
                                             $subjects = $this->getSubject($dbc1);
                                             foreach ($subjects as $subject) {
                                                 if($subject['SubjectID'] == $class['SubjectID']) {
@@ -96,8 +96,8 @@
                                         echo '</select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="faculty">Faculty</label>
-                                        <select name="faculty" class="form-control select2Faculty'.$class['Class'].' select2-success" id="faculty" data-dropdown-css-class="select2-success" style="width: 100%;">';
+                                        <label for="faculty'.$class['ClassID'].'">Faculty</label>
+                                        <select name="faculty" class="form-control select2Faculty'.$class['ClassID'].' select2-success" id="faculty'.$class['ClassID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
                                             $ratees = $this->getRatee($dbc1);
                                             foreach ($ratees as $ratee) {
                                                 if($ratee['RateeID'] == $class['RateeID']) {
@@ -109,8 +109,8 @@
                                         echo '</select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="academicYear">Academic Year</label>
-                                        <select name="academicYear" class="form-control select2AcademicYear'.$class['Class'].' select2-success" id="academicYear" data-dropdown-css-class="select2-success" style="width: 100%;">';
+                                        <label for="academicYear'.$class['ClassID'].'">Academic Year</label>
+                                        <select name="academicYear" class="form-control select2AcademicYear'.$class['ClassID'].' select2-success" id="academicYear'.$class['ClassID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
                                             $academicYears = $this->getAcademicYear($dbc1, false);
                                             foreach ($academicYears as $academicYear) {
                                                 if($academicYear['AcademicYearID'] == $class['AcademicYearID']) {
@@ -122,8 +122,8 @@
                                         echo '</select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="semester">Semester</label>
-                                        <select name="semester" class="form-control select2Semester'.$class['Class'].' select2-success" id="semester" data-dropdown-css-class="select2-success" style="width: 100%;">';
+                                        <label for="semester'.$class['ClassID'].'">Semester</label>
+                                        <select name="semester" class="form-control select2Semester'.$class['ClassID'].' select2-success" id="semester'.$class['ClassID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
                                             $semesters = $this->getSemester($dbc1, false);
                                             foreach ($semesters as $semester) {
                                                 if($semester['SemesterID'] == $class['SemesterID']) {

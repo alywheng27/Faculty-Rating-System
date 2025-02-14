@@ -118,6 +118,21 @@
             echo 'QuestionSet';
         }
 
+        function displayEnrollmentAdded(){
+            echo 'EnrollmentAdded';
+            unset($_SESSION['EnrollmentAdded']);
+        }
+
+        function displayEnrollmentUpdated(){
+            echo 'EnrollmentUpdated';
+            unset($_SESSION['EnrollmentUpdated']);
+        }
+
+        function displayEnrollmentDeleted(){
+            echo 'EnrollmentDeleted';
+            unset($_SESSION['EnrollmentDeleted']);
+        }
+
         function displayInvalidCredentials(){
             echo 'InvalidCredentials';
             unset($_SESSION['InvalidCredentials']);
@@ -245,6 +260,18 @@
 
     if(isset($_GET['QuestionSet'])){
         $n->displayQuestionSet();
+    }
+
+    if(isset($_SESSION['EnrollmentAdded'])){
+        $n->displayEnrollmentAdded();
+    }
+
+    if(isset($_SESSION['EnrollmentUpdated'])){
+        $n->displayEnrollmentUpdated();
+    }
+
+    if(isset($_SESSION['EnrollmentDeleted'])){
+        $n->displayEnrollmentDeleted();
     }
 
     if(isset($_SESSION['InvalidCredentials'])){

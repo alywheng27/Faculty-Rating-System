@@ -1,7 +1,7 @@
 <?php
     class ClassRate extends QueryRepo{
         function displayClassRate($dbc1){
-            $classes = $this->getClass($dbc1);
+            $classes = $this->getClass($dbc1, null);
 
             foreach ($classes as $class) {
                 echo '
