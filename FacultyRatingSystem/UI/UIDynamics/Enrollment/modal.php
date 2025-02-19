@@ -1,7 +1,7 @@
 <?php
     class EnrollmentModal extends QueryRepo{
         function displayEnrollment($dbc1){
-            $enrollments = $this->getEnrollment($dbc1);
+            $enrollments = $this->getEnrollment($dbc1, null, null, null);
             echo '
             <div class="modal fade" id="enrollment">
                 <div class="modal-dialog modal-md">

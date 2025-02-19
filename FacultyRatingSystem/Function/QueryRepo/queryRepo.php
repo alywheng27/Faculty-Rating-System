@@ -218,14 +218,15 @@
         }
 
         function getQuestion($dbc1, $categoryID, $questionOrder){
-            $query = "SELECT * FROM question ";
+            $query = "SELECT QuestionID, Question, question.CategoryID, question.Order as QuestionOrder, category.Order as CategoryOrder FROM question
+                JOIN category ON category.CategoryID = question.CategoryID ";
             if($categoryID != null){
-                $query = $query . " WHERE CategoryID = :categoryID ";
+                $query = $query . " WHERE question.CategoryID = :categoryID ";
             }
             if($questionOrder != null){
                 $query = $query . " AND question.Order = :questionOrder ";
             }
-            $query = $query . " ORDER BY CategoryID, question.Order ";
+            $query = $query . " ORDER BY category.Order, question.Order ";
             
             $pdo = $dbc1->prepare($query);
             if($categoryID != null){
@@ -243,7 +244,8 @@
                     'QuestionID' => $row['QuestionID'],
                     'Question' => $row['Question'],
                     'CategoryID' => $row['CategoryID'],
-                    'Order' => $row['Order'],
+                    'Order' => $row['QuestionOrder'],
+                    'CategoryOrder' => $row['CategoryOrder'],
                 );
 
                 $count++;
@@ -252,11 +254,26 @@
             return $questions;
         }
 
-        function getEnrollment($dbc1){
+        function getEnrollment($dbc1, $RaterID, $enrollmentID, $limit){
             $query = "SELECT * FROM enrollment
                         JOIN rater ON rater.RaterID = enrollment.RaterID 
                         JOIN class ON class.ClassID = enrollment.ClassID ";
+            if($RaterID != null){
+                $query = $query . " WHERE enrollment.RaterID = :RaterID ";
+            }
+            if($enrollmentID != null){
+                $query = $query . " WHERE enrollment.EnrollmentID = :enrollmentID ";
+            }
+            if($limit != null){
+                $query = $query . " AND HasRated = 0 ";
+            }
             $pdo = $dbc1->prepare($query);
+            if($RaterID != null){
+                $pdo->bindParam(':RaterID', $RaterID);
+            }
+            if($enrollmentID != null){
+                $pdo->bindParam(':enrollmentID', $enrollmentID);
+            }
             $pdo->execute();
             
             $enrollments = [];

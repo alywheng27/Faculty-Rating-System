@@ -8,6 +8,9 @@
     <div class="sidebar">
         <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="sidebarMainFolder">
+            <?php
+                if ($_SESSION['UserType'] == 'Admin') {
+            ?>
             <li class="nav-item">
                 <a href="?dashboard=true" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -79,6 +82,9 @@
                     <p>Admin</p>
                 </a>
             </li>
+            <?php
+                }
+            ?>
         </ul>
         </nav>
     </div>

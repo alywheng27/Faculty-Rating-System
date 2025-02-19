@@ -1,4 +1,4 @@
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .editButton {
     display: none;
   }
@@ -6,7 +6,7 @@
   .deleteButton {
     display: none;
   }
-}
+} */
 
 .background-img {
   background-size: cover;
@@ -14,7 +14,7 @@
   background-position: center;
 }
 
-.candidate-card {
+/* .candidate-card {
   color: rgb(212, 212, 212);
 }
 
@@ -23,7 +23,6 @@
   color: white;
 }
 
-/* HIDE RADIO */
 [type=radio] { 
   position: absolute;
   opacity: 0;
@@ -38,7 +37,6 @@
   height: 0;
 }
 
-/* IMAGE STYLES */
 [type=radio] + label {
   cursor: pointer;
 }
@@ -47,14 +45,12 @@
   cursor: pointer;
 }
 
-/* CHECKED STYLES */
 [type=radio]:checked + label {
   border: 5px solid #d39e00;
   color: white;
 }
 
-/* CHECKED STYLES */
 [type=checkbox]:checked + label {
   border: 5px solid #d39e00;
   color: white;
-}
+} */

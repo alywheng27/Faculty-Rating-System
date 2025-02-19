@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include 'FacultyRatingSystem/UI/UIParts/head.php' ?>
+  <?php 
+    session_unset();
+    session_destroy();
+    include 'FacultyRatingSystem/UI/UIParts/head.php' 
+  ?>
 </head>
 <body class="hold-transition login-page background-img" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('FacultyRatingSystem/Skin/dist/img/login-background.jpg');">
 <div class="login-box">

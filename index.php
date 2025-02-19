@@ -41,6 +41,10 @@
             include 'FacultyRatingSystem/UI/enrollment.php';
         }
 
+        public function evaluation($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/evaluation.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -75,6 +79,10 @@
             include 'FacultyRatingSystem/Function/enrollment.php';
         }
 
+        public function evaluationFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/evaluation.php';
+        }
+
 
         public function loginFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/login.php';
@@ -93,6 +101,10 @@
 
         public function questionOrder($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIDynamics/Question/questionOrder.php';
+        }
+
+        public function evaluationSelected($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/evaluationSelected.php';
         }
 
         public function notification($dbc1, $dbc2) {
@@ -194,6 +206,8 @@
         $main->question($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['enrollment'])){
         $main->enrollment($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['evaluation'])){
+        $main->evaluation($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -215,6 +229,10 @@
         $main->questionFunction($dbc1, $dbc2);
     }else if(isset($_GET['enrollmentFunction'])){
         $main->enrollmentFunction($dbc1, $dbc2);
+    }else if(isset($_GET['evaluationFunction'])){
+        $main->evaluationFunction($dbc1, $dbc2);
+    }else if(isset($_GET['evaluationSelected'])){
+        $main->evaluationSelected($dbc1, $dbc2);
     }
 
     // Dynamics

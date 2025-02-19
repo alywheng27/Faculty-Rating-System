@@ -1,7 +1,7 @@
 <?php
     class Enrollment extends QueryRepo{
         function displayEnrollment($dbc1){
-            $enrollments = $this->getEnrollment($dbc1, NULL);
+            $enrollments = $this->getEnrollment($dbc1, null, null, null);
 
             foreach ($enrollments as $enrollment) {
                 echo '

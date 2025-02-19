@@ -1,7 +1,7 @@
 <?php
     class EnrollmentDependency extends QueryRepo{
         function installEnrollmentDependency($dbc1){
-            $enrollments = $this->getEnrollment($dbc1);
+            $enrollments = $this->getEnrollment($dbc1, null, null, null);
 
             foreach ($enrollments as $enrollment) {
                 echo '

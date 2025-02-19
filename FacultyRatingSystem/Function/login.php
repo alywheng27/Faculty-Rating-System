@@ -16,9 +16,9 @@
             return $row;
         }
 
-        function loginVoter($dbc1, $username, $password){
-            $query = "SELECT COUNT(*) AS Count, UserID, Name FROM Voter 
-                WHERE IDNumber = :username AND Password = :password AND HasVoted = 0";
+        function loginRater($dbc1, $username, $password){
+            $query = "SELECT COUNT(*) AS Count, RaterID, FirstName FROM Rater 
+                WHERE RaterIDNumber = :username AND Password = :password ";
             $pdo = $dbc1->prepare($query);
             $pdo->bindParam(':username', $username);
             $pdo->bindParam(':password', $password);
@@ -26,8 +26,24 @@
 
             $row = $pdo->fetch();
 
-            $_SESSION['name'] = $row['Name'];
-            $_SESSION['id'] = $row['UserID'];
+            $_SESSION['name'] = $row['FirstName'];
+            $_SESSION['id'] = $row['RaterID'];
+
+            return $row;
+        }
+
+        function loginRatee($dbc1, $username, $password){
+            $query = "SELECT COUNT(*) AS Count, RateeID, FirstName FROM Ratee 
+                WHERE RateeIDNumber = :username AND Password = :password ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->bindParam(':username', $username);
+            $pdo->bindParam(':password', $password);
+            $pdo->execute();
+
+            $row = $pdo->fetch();
+
+            $_SESSION['name'] = $row['FirstName'];
+            $_SESSION['id'] = $row['RaterID'];
 
             return $row;
         }
@@ -48,16 +64,28 @@
 
         if($row['Count'] > 0){
             header('Location: ?dashboard=true');
-        }else {
-            $row = $login->loginVoter($dbc1, $username, $password);
-
-            if($row['Count'] > 0) {
-                header('Location: ?ballot=true');
-            }else {
-                $_SESSION['InvalidCredentials'] = true;
-                header('Location: index.php');
-            }
+            $_SESSION['UserType'] = 'Admin';
+            exit();
         }
+
+        $row = $login->loginRater($dbc1, $username, $password);
+
+        if($row['Count'] > 0){
+            header('Location: ?evaluation=true');
+            $_SESSION['UserType'] = 'Rater';
+            exit();
+        }
+
+        $row = $login->loginRatee($dbc1, $username, $password);
+
+        if($row['Count'] > 0){
+            header('Location: ?result=true');
+            $_SESSION['UserType'] = 'Ratee';
+            exit();
+        }
+
+        $_SESSION['InvalidCredentials'] = true;
+        header('Location: index.php');
     }else {
         $_SESSION['IncompleteCredentials'] = true;
         header('Location: index.php');

@@ -133,6 +133,11 @@
             unset($_SESSION['EnrollmentDeleted']);
         }
 
+        function displayEvaluationAdded(){
+            echo 'EvaluationAdded';
+            unset($_SESSION['EvaluationAdded']);
+        }
+
         function displayInvalidCredentials(){
             echo 'InvalidCredentials';
             unset($_SESSION['InvalidCredentials']);
@@ -272,6 +277,10 @@
 
     if(isset($_SESSION['EnrollmentDeleted'])){
         $n->displayEnrollmentDeleted();
+    }
+
+    if(isset($_SESSION['EvaluationAdded'])){
+        $n->displayEvaluationAdded();
     }
 
     if(isset($_SESSION['InvalidCredentials'])){

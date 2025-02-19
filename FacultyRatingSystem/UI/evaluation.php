@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Enrollment</h1>
+            <h1 class="m-0 text-dark">Evaluation</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Enrollment</li>
+              <li class="breadcrumb-item active">Evaluation</li>
             </ol>
           </div>
         </div>
@@ -33,31 +33,49 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Enrollment</h3>
+              <h3 class="card-title">Evaluation</h3>
             </div>
             
             <div class="card-body table-responsive">
-              <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#enrollment">Enroll Student</button>
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Class</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Enrollment/enrollment.php'; ?>
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Student</th>
-                  <th>Class</th>
-                  <th>Action</th>
-                </tr>
-                </tfoot>
-              </table>
-              </div>
+              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?evaluationSelected=true" method="post">
+                <div class="row">
+                  <div class="col-md-4">
+                    <select name="class" class="form-control select2Class select2-primary" id="class" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                      <?php
+                        $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['id'], null, true);
+                        foreach ($enrollments as $enrollment) {
+                            echo '<option value="'.$enrollment['EnrollmentID'].'">'.$enrollment['Class'].' ('.$enrollment['FirstName'].' '.$enrollment['Surname'].')</option>';
+                        }
+                        ?>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setEvaluation">Select Class</button>
+                  </div>
+                  <div class="col-md-6">
+                    <?php
+                      if(isset($_SESSION['EnrollmentID'])){
+                        $enrollments = $queryRepoMain->getEnrollment($dbc1, null, $_SESSION['EnrollmentID'], null);
+                        foreach ($enrollments as $enrollment) {
+                          echo '<h4 class="float-right">Class: <strong>'.$enrollment['Class'].'</strong></h4>';
+                        }
+                      }else {
+                        echo '<h4 class="float-right">Class: <strong>None</strong></h4>';
+                      }
+                    ?>
+                  </div>
+                </div>
+              </form>
+                <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?evaluationFunction=true" method="post">
+                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/evaluation.php'; ?>
+                  <?php
+                    if(isset($_SESSION['EnrollmentID'])){
+                      echo '<button type="submit" class="btn btn-success mb-3 float-right mr-2" id="setEvaluation">Submit Evaluation</button>';
+                    }
+                  ?>
+                  
+                </form>
+            </div>
           </div>
       </div>
     </div>
@@ -74,7 +92,7 @@
 </div>
 
 <?php include 'FacultyRatingSystem/UI/UIParts/modal.php' ?>
-<?php include 'FacultyRatingSystem/UI/UIDynamics/Enrollment/modal.php'; ?>
+<?php include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/modal.php'; ?>
 
 <!-- REQUIRED SCRIPTS -->
 
@@ -88,6 +106,7 @@
 <script src="FacultyRatingSystem/Skin/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="FacultyRatingSystem/Skin/plugins/toastr/toastr.min.js"></script>
+
 <!-- DataTables -->
 <script src="FacultyRatingSystem/Skin/plugins/datatables/jquery.dataTables.js"></script>
 <script src="FacultyRatingSystem/Skin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
@@ -105,16 +124,19 @@
 <script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="FacultyRatingSystem/Skin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<script src="FacultyRatingSystem/Skin/plugins/Sortable.min.js"></script>
+<script src="FacultyRatingSystem/Skin/plugins/jquery-sortable.js"></script>
+
+
 
 <!-- AdminLTE App -->
 <script src="FacultyRatingSystem/Skin/dist/js/adminlte.min.js"></script>
 
 <script>
   //Initialize Select2 Elements
-  $('.select2Rater').select2();
   $('.select2Class').select2();
 
-  <?php include 'FacultyRatingSystem/UI/UIDynamics/Enrollment/dependency.php'; ?>
+  <?php include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/dependency.php'; ?>
 
   //Initialize Select2 Elements
   $('.select2bs4').select2({
@@ -175,7 +197,7 @@
       type: "get",
       url: '?notification=true',
       success: function(data){
-        if(data == 'EnrollmentAdded'){
+        if(data == 'EvaluationAdded'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -183,29 +205,7 @@
             timer: 3000
           });
 
-          toastr.success('Enrollment Added.');
-        }
-
-        if(data == 'EnrollmentUpdated'){
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000
-          });
-
-          toastr.info('Enrollment Updated.');
-        }
-
-        if(data == 'EnrollmentDeleted'){
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'center',
-            showConfirmButton: false,
-            timer: 3000
-          });
-
-          toastr.error('Enrollment Deleted.');
+          toastr.success('Evaluation Added.');
         }
 
       }
