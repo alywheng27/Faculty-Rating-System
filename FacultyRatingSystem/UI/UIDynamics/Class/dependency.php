@@ -1,7 +1,7 @@
 <?php
     class ClassDependency extends QueryRepo{
         function installClassDependency($dbc1){
-            $classes = $this->getClass($dbc1, NULL);
+            $classes = $this->getClass($dbc1, null, null);
 
             foreach ($classes as $class) {
                 echo "

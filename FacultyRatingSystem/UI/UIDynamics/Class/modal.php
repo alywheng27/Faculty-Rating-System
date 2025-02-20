@@ -1,7 +1,7 @@
 <?php
     class ClassModal extends QueryRepo{
         function displayClass($dbc1){
-            $classes = $this->getClass($dbc1, null);
+            $classes = $this->getClass($dbc1, null, null);
             echo '
             <div class="modal fade" id="class">
                 <div class="modal-dialog modal-md">

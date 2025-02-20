@@ -45,6 +45,10 @@
             include 'FacultyRatingSystem/UI/evaluation.php';
         }
 
+        public function reportAdmin($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/reportAdmin.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -83,6 +87,10 @@
             include 'FacultyRatingSystem/Function/evaluation.php';
         }
 
+        public function reportAdminFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/reportAdmin.php';
+        }
+
 
         public function loginFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/login.php';
@@ -105,6 +113,18 @@
 
         public function evaluationSelected($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/evaluationSelected.php';
+        }
+
+        public function classReport($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/classReport.php';
+        }
+
+        public function raterReport($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/raterReport.php';
+        }
+
+        public function reportSelected($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/reportSelected.php';
         }
 
         public function notification($dbc1, $dbc2) {
@@ -208,6 +228,8 @@
         $main->enrollment($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['evaluation'])){
         $main->evaluation($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['reportAdmin'])){
+        $main->reportAdmin($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -233,6 +255,10 @@
         $main->evaluationFunction($dbc1, $dbc2);
     }else if(isset($_GET['evaluationSelected'])){
         $main->evaluationSelected($dbc1, $dbc2);
+    }else if(isset($_GET['reportAdminFunction'])){
+        $main->reportAdminFunction($dbc1, $dbc2);
+    }else if(isset($_GET['reportSelected'])){
+        $main->reportSelected($dbc1, $dbc2);
     }
 
     // Dynamics
@@ -240,6 +266,10 @@
         $main->categoryOrder($dbc1, $dbc2);
     }else if(isset($_GET['questionOrder'])){
         $main->questionOrder($dbc1, $dbc2);
+    }else if(isset($_GET['classReport'])){
+        $main->classReport($dbc1, $dbc2);
+    }else if(isset($_GET['raterReport'])){
+        $main->raterReport($dbc1, $dbc2);
     }
 
     // Parts

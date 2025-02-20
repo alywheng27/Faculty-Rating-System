@@ -35,7 +35,7 @@
     $e = new Evaluation();
 
     $raterID = $_SESSION['id'];
-    $enrollments = $e->getEnrollment($dbc1, null, $_SESSION['EnrollmentID'], null);
+    $enrollments = $e->getEnrollment($dbc1, null, $_SESSION['EnrollmentID'], null, null);
     $classID = $enrollments[0]['ClassID'];
 
     $categories = $e->getCategory($dbc1, null);

@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Evaluation</h1>
+            <h1 class="m-0 text-dark">Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Evaluation</li>
+              <li class="breadcrumb-item active">Report</li>
             </ol>
           </div>
         </div>
@@ -33,47 +33,60 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Evaluation</h3>
+              <h3 class="card-title">Report</h3>
             </div>
             
             <div class="card-body table-responsive">
-              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?evaluationSelected=true" method="post">
+              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?reportSelected=true" method="post">
                 <div class="row">
-                  <div class="col-md-4">
-                    <select name="class" class="form-control select2Class select2-primary" id="class" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                  <div class="col-md-2">
+                    <select name="ratee" class="form-control select2Ratee select2-primary" id="ratee" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                      <option value="" disabled="disabled" selected>Select a Faculty</option>
                       <?php
-                        $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['id'], null, true, null);
-                        foreach ($enrollments as $enrollment) {
-                            echo '<option value="'.$enrollment['EnrollmentID'].'">'.$enrollment['Class'].' ('.$enrollment['RateeFirstName'].' '.$enrollment['RateeSurname'].')</option>';
+                        $ratees = $queryRepoMain->getRatee($dbc1);
+                        foreach ($ratees as $ratee) {
+                            echo '<option value="'.$ratee['RateeID'].'">'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
                         }
                         ?>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setEvaluation">Select Class</button>
+                    <select name="class" class="form-control select2Class select2-primary" id="class" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                    </select>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-2">
+                    <select name="rater" class="form-control select2Rater select2-primary" id="rater" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setReport">Generate Report</button>
+                  </div>
+              </form>
+                  <div class="col-md-4">
                     <?php
-                      if(isset($_SESSION['EnrollmentID'])){
-                        $enrollments = $queryRepoMain->getEnrollment($dbc1, null, $_SESSION['EnrollmentID'], null, null);
+                      if(isset($_SESSION['RaterID'])){
+                        $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
                         foreach ($enrollments as $enrollment) {
-                          echo '<h4 class="float-right">Class: <strong>'.$enrollment['Class'].'</strong></h4>';
+                          echo '<h4 class="float-right">Student: <strong>'.$enrollment['RaterFirstName'].' '.$enrollment['RaterSurname'].'</strong></h4>';
                         }
                       }else {
-                        echo '<h4 class="float-right">Class: <strong>None</strong></h4>';
+                        echo '<h4 class="float-right">Student: <strong>None</strong></h4>';
                       }
                     ?>
                   </div>
                 </div>
-              </form>
-                <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?evaluationFunction=true" method="post">
-                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Evaluation/evaluation.php'; ?>
-                  <?php
-                    if(isset($_SESSION['EnrollmentID'])){
-                      echo '<button type="submit" class="btn btn-success mb-3 float-right mr-2" id="setEvaluation">Submit Evaluation</button>';
+              
+                <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?reportFunction=true" method="post">
+                  <?php 
+                    if(isset($_SESSION['RaterID'])){
+                      include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/report.php'; 
                     }
                   ?>
-                  
+                  <?php
+                    if(isset($_SESSION['EnrollmentID'])){
+                      echo '<button type="submit" class="btn btn-success mb-3 float-right mr-2" id="setReport">Submit Report</button>';
+                    }
+                  ?>
                 </form>
             </div>
           </div>
@@ -92,7 +105,6 @@
 </div>
 
 <?php include 'FacultyRatingSystem/UI/UIParts/modal.php' ?>
-
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
@@ -133,11 +145,40 @@
 
 <script>
   //Initialize Select2 Elements
+  $('.select2Ratee').select2();
   $('.select2Class').select2();
+  $('.select2Rater').select2();
 
   //Initialize Select2 Elements
   $('.select2bs4').select2({
       theme: 'bootstrap4'
+  })
+</script>
+
+<script>
+  $("#ratee").change(function(){
+    var rateeID = $(this).val();
+    $.ajax({
+      type: "post",
+      url: '?classReport=true',
+      data: {rateeID: rateeID},
+      success: function(data){
+        document.getElementById("class").innerHTML = data;
+        document.getElementById("rater").innerHTML = "";
+      }
+    });
+  })
+
+  $("#class").change(function(){
+    var classID = $(this).val();
+    $.ajax({
+      type: "post",
+      url: '?raterReport=true',
+      data: {classID: classID},
+      success: function(data){
+        document.getElementById("rater").innerHTML = data;
+      }
+    });
   })
 </script>
 
@@ -146,7 +187,7 @@
       type: "get",
       url: '?notification=true',
       success: function(data){
-        if(data == 'EvaluationAdded'){
+        if(data == 'ReportAdded'){
           const Toast = Swal.mixin({
             toast: true,
             position: 'center',
@@ -154,7 +195,7 @@
             timer: 3000
           });
 
-          toastr.success('Evaluation Added.');
+          toastr.success('Report Added.');
         }
 
       }

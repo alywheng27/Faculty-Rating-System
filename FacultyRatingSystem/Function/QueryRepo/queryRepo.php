@@ -151,7 +151,7 @@
             return $semesters;
         }
 
-        function getClass($dbc1, $active){
+        function getClass($dbc1, $active, $rateeID){
             $query = "SELECT * FROM class 
                 JOIN subject ON subject.SubjectID = class.SubjectID
                 JOIN ratee ON ratee.RateeID = class.RateeID
@@ -160,9 +160,15 @@
             if($active != null){
                 $query = $query . " WHERE academicyear.IsActive = :active AND semester.IsActive = :active ";
             }
+            if($rateeID != null){
+                $query = $query . " AND ratee.RateeID = :rateeID ";
+            }
             $pdo = $dbc1->prepare($query);
             if($active != null){
                 $pdo->bindParam(':active', $active);
+            }
+            if($rateeID != null){
+                $pdo->bindParam(':rateeID', $rateeID);
             }
             $pdo->execute();
             
@@ -254,18 +260,34 @@
             return $questions;
         }
 
-        function getEnrollment($dbc1, $RaterID, $enrollmentID, $limit){
-            $query = "SELECT * FROM enrollment
+        function getEnrollment($dbc1, $RaterID, $enrollmentID, $limit, $classID){
+            $bool = true;
+            $query = "SELECT EnrollmentID, enrollment.RaterID as RaterID, class.RateeID as RateeID, 
+                        rater.FirstName as RaterFirstName, rater.MiddleName as RaterMiddleName, rater.Surname as RaterSurname, 
+                        ratee.FirstName as RateeFirstName, ratee.MiddleName as RateeMiddleName, ratee.Surname as RateeSurname, 
+                        class.ClassID as ClassID, class.Class as Class 
+                        FROM enrollment
                         JOIN rater ON rater.RaterID = enrollment.RaterID 
-                        JOIN class ON class.ClassID = enrollment.ClassID ";
+                        JOIN class ON class.ClassID = enrollment.ClassID
+                        JOIN Ratee ON Ratee.RateeID = class.RateeID
+                        JOIN AcademicYear ON AcademicYear.AcademicYearID = class.AcademicYearID
+                        JOIN Semester ON Semester.SemesterID = class.SemesterID ";
             if($RaterID != null){
                 $query = $query . " WHERE enrollment.RaterID = :RaterID ";
-            }
-            if($enrollmentID != null){
+            }else if($enrollmentID != null){
                 $query = $query . " WHERE enrollment.EnrollmentID = :enrollmentID ";
+            }else if($classID != null){
+                $query = $query . " WHERE class.ClassID = :classID ";
+            }else{
+                $query = $query . " WHERE academicyear.IsActive = 1 AND semester.IsActive = 1 ";
+                $bool = false;
             }
+            
             if($limit != null){
                 $query = $query . " AND HasRated = 0 ";
+            }
+            if($bool){
+                $query = $query . " AND academicyear.IsActive = 1 AND semester.IsActive = 1 ";
             }
             $pdo = $dbc1->prepare($query);
             if($RaterID != null){
@@ -273,6 +295,9 @@
             }
             if($enrollmentID != null){
                 $pdo->bindParam(':enrollmentID', $enrollmentID);
+            }
+            if($classID != null){
+                $pdo->bindParam(':classID', $classID);
             }
             $pdo->execute();
             
@@ -282,9 +307,13 @@
                 $enrollments[$count] = array(
                     'EnrollmentID' => $row['EnrollmentID'],
                     'RaterID' => $row['RaterID'],
-                    'FirstName' => $row['FirstName'],
-                    'MiddleName' => $row['MiddleName'],
-                    'Surname' => $row['Surname'],
+                    'RateeID' => $row['RateeID'],
+                    'RaterFirstName' => $row['RaterFirstName'],
+                    'RaterMiddleName' => $row['RaterMiddleName'],
+                    'RaterSurname' => $row['RaterSurname'],
+                    'RateeFirstName' => $row['RateeFirstName'],
+                    'RateeMiddleName' => $row['RateeMiddleName'],
+                    'RateeSurname' => $row['RateeSurname'],
                     'ClassID' => $row['ClassID'],
                     'Class' => $row['Class'],
                 );
@@ -293,6 +322,43 @@
             }
 
             return $enrollments;
+        }
+
+        function getAnswer($dbc1, $questionID, $raterID, $classID){
+            $query = "SELECT * FROM answer ";
+            if($questionID != null){
+                $query = $query . " WHERE QuestionID = :questionID";
+            }
+            if($raterID != null){
+                $query = $query . " AND RaterID = :raterID";
+            }
+            if($classID != null){
+                $query = $query . " AND ClassID = :classID";
+            }
+            $pdo = $dbc1->prepare($query);
+            if($questionID != null) {
+                $pdo->bindParam(':questionID', $questionID);
+            }
+            if($raterID != null){
+                $pdo->bindParam(':raterID', $raterID);
+            }
+            if($classID != null){
+                $pdo->bindParam(':classID', $classID);
+            }
+            $pdo->execute();
+            
+            $answer = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $answer[$count] = array(
+                    'AnswerID' => $row['AnswerID'],
+                    'Answer' => $row['Answer'],
+                );
+
+                $count++;
+            }
+
+            return $answer;
         }
 
         function key(){

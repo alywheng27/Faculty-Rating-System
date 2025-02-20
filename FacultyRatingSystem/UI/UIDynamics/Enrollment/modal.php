@@ -1,7 +1,7 @@
 <?php
     class EnrollmentModal extends QueryRepo{
         function displayEnrollment($dbc1){
-            $enrollments = $this->getEnrollment($dbc1, null, null, null);
+            $enrollments = $this->getEnrollment($dbc1, null, null, null, null);
             echo '
             <div class="modal fade" id="enrollment">
                 <div class="modal-dialog modal-md">
@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="class">Class</label>
                             <select name="class" class="form-control select2Class select2-success" id="class" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                $classes = $this->getClass($dbc1, true);
+                                $classes = $this->getClass($dbc1, true, null);
                                 foreach ($classes as $class) {
                                     echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
                                 }
@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     <label for="class'.$enrollment['EnrollmentID'].'">Class</label>
                                     <select name="class" class="form-control select2Class'.$enrollment['EnrollmentID'].' select2-success" id="class'.$enrollment['EnrollmentID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                        $classes = $this->getClass($dbc1, true);
+                                        $classes = $this->getClass($dbc1, true, null);
                                         foreach ($classes as $class) {
                                             echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
                                         }

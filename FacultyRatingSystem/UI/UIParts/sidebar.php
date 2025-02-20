@@ -70,9 +70,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="?result=true" class="nav-link">
+                <a href="?reportAdmin=true" class="nav-link">
                     <i class="fas fa-clipboard-list nav-icon"></i>
-                    <p>Resut</p>
+                    <p>Report</p>
                 </a>
             </li>
             <li class="nav-header">CONTROL PANEL</li>

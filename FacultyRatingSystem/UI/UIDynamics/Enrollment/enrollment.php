@@ -1,12 +1,12 @@
 <?php
     class Enrollment extends QueryRepo{
         function displayEnrollment($dbc1){
-            $enrollments = $this->getEnrollment($dbc1, null, null, null);
+            $enrollments = $this->getEnrollment($dbc1, null, null, null, null);
 
             foreach ($enrollments as $enrollment) {
                 echo '
                     <tr>
-                        <td>'.$enrollment['FirstName'].' '.$enrollment['Surname'].'</td>
+                        <td>'.$enrollment['RaterFirstName'].' '.$enrollment['RaterSurname'].'</td>
                         <td>'.$enrollment['Class'].'</td>
                         <td style="display: flex; column-gap: 5px;">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit'.$enrollment['EnrollmentID'].'"><i class="fas fa-edit nav-icon"></i><span class="ml-2 editButton">Edit</span></button>
