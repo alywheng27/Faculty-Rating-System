@@ -37,21 +37,18 @@
             </div>
             
             <div class="card-body table-responsive">
-              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?reportSelected=true" method="post">
+              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?reportSelectedFaculty=true" method="post">
                 <div class="row">
                   <div class="col-md-2">
-                    <select name="ratee" class="form-control select2Ratee select2-primary" id="ratee" data-dropdown-css-class="select2-primary" style="width: 100%;">';
-                      <option value="" disabled="disabled" selected>Select a Faculty</option>
-                      <?php
-                        $ratees = $queryRepoMain->getRatee($dbc1);
-                        foreach ($ratees as $ratee) {
-                            echo '<option value="'.$ratee['RateeID'].'">'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
-                        }
-                        ?>
-                    </select>
-                  </div>
-                  <div class="col-md-2">
                     <select name="class" class="form-control select2Class select2-primary" id="class" data-dropdown-css-class="select2-primary" style="width: 100%;">';
+                      <option value="" disabled="disabled" selected>Select a Class</option>
+                      <?php
+                        $rateeID = $_SESSION['id'];
+                        $classes = $queryRepoMain->getClass($dbc1, true, $rateeID);
+                        foreach ($classes as $class) {
+                          echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
+                        }
+                      ?>
                     </select>
                   </div>
                   <div class="col-md-2">
@@ -62,7 +59,7 @@
                     <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setReport">Generate Report</button>
                   </div>
               </form>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <?php
                       if(isset($_SESSION['RaterID'])){
                         $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
@@ -78,7 +75,7 @@
               
                 <?php 
                   if(isset($_SESSION['RaterID'])){
-                    include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/report.php'; 
+                    include 'FacultyRatingSystem/UI/UIDynamics/ReportFaculty/report.php'; 
                   }
                 ?>
             </div>
@@ -149,24 +146,11 @@
 </script>
 
 <script>
-  $("#ratee").change(function(){
-    var rateeID = $(this).val();
-    $.ajax({
-      type: "post",
-      url: '?classReport=true',
-      data: {rateeID: rateeID},
-      success: function(data){
-        document.getElementById("class").innerHTML = data;
-        document.getElementById("rater").innerHTML = "";
-      }
-    });
-  })
-
   $("#class").change(function(){
     var classID = $(this).val();
     $.ajax({
       type: "post",
-      url: '?raterReport=true',
+      url: '?raterReportFaculty=true',
       data: {classID: classID},
       success: function(data){
         document.getElementById("rater").innerHTML = data;

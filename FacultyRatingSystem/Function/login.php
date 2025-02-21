@@ -43,7 +43,7 @@
             $row = $pdo->fetch();
 
             $_SESSION['name'] = $row['FirstName'];
-            $_SESSION['id'] = $row['RaterID'];
+            $_SESSION['id'] = $row['RateeID'];
 
             return $row;
         }
@@ -79,7 +79,7 @@
         $row = $login->loginRatee($dbc1, $username, $password);
 
         if($row['Count'] > 0){
-            header('Location: ?result=true');
+            header('Location: ?reportFaculty=true');
             $_SESSION['UserType'] = 'Ratee';
             exit();
         }
