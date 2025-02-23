@@ -143,14 +143,19 @@
             unset($_SESSION['InvalidCredentials']);
         }
 
+        function displayRegistered(){
+            echo 'Registered';
+            unset($_SESSION['Registered']);
+        }
+
+        function displayPasswordMismatch(){
+            echo 'PasswordMismatch';
+            unset($_SESSION['PasswordMismatch']);
+        }
+
         function displayIncompleteCredentials(){
             echo 'IncompleteCredentials';
             unset($_SESSION['IncompleteCredentials']);
-        }
-
-        function displayBallotSubmitted(){
-            echo 'BallotSubmitted';
-            unset($_SESSION['BallotSubmitted']);
         }
 
         function displayUserAdded(){
@@ -287,12 +292,16 @@
         $n->displayInvalidCredentials();
     }
 
-    if(isset($_SESSION['IncompleteCredentials'])){
-        $n->displayIncompleteCredentials();
+    if(isset($_SESSION['Registered'])){
+        $n->displayRegistered();
     }
 
-    if(isset($_SESSION['BallotSubmitted'])){
-        $n->displayBallotSubmitted();
+    if(isset($_SESSION['PasswordMismatch'])){
+        $n->displayPasswordMismatch();
+    }
+
+    if(isset($_SESSION['IncompleteCredentials'])){
+        $n->displayIncompleteCredentials();
     }
 
     if(isset($_SESSION['UserAdded'])){

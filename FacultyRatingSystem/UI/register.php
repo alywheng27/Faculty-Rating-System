@@ -12,18 +12,56 @@
       <a href="" class="h1"><b>Faculty Evaluation System</b></a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Register an account</p>
 
-      <form role="form" id="quickForm" enctype="multipart/form-data" action="?loginFunction=true" method="post">
+      <form role="form" id="quickForm" enctype="multipart/form-data" action="?registerFunction=true" method="post">
         <div class="form-group">
           <div class="input-group mb-3">
-            <input type="text" name="username" class="form-control" placeholder="ID Number" autocomplete="off">
+            <input type="text" name="idNumber" class="form-control" placeholder="ID Number" autocomplete="off">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-id-card"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="text" name="firstName" class="form-control" placeholder="FirstName" autocomplete="off">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
           </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="text" name="middleName" class="form-control" placeholder="Middle Name" autocomplete="off">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="text" name="surname" class="form-control" placeholder="Surname" autocomplete="off">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <select name="userType" class="form-control select2UserType select2-success" id="userType" data-dropdown-css-class="select2-success" style="width: 100%;">
+              <option value="" disabled="disabled" selected>User Type</option>
+              <option value="Student">Student</option>
+              <option value="Supervisor">Supervisor</option>
+              <option value="Faculty">Faculty</option>
+            </select>
         </div>
         <div class="form-group">
           <div class="input-group mb-3">
@@ -35,12 +73,22 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <button type="submit" class="btn btn-success btn-block">Sign In</button>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <input type="password" name="confirmPassword" class="form-control" data-toggle="password" placeholder="Confirm Password">
+            <div class="input-group-append">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fa fa-eye"></i></span>
+              </div>
+            </div>
           </div>
-          <div class="col-6">
-            <a href="?register" class="btn btn-primary btn-block">Register</a>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <div class="col-md-6">
+            <a href="index.php" class="btn btn-success btn-block">Sign In</a>
           </div>
         </div>
       </form>
@@ -52,7 +100,8 @@
 <script src="FacultyRatingSystem/Skin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="FacultyRatingSystem/Skin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- Select2 -->
+<script src="FacultyRatingSystem/Skin/plugins/select2/js/select2.full.min.js"></script>
 <!-- SweetAlert2 -->
 <script src="FacultyRatingSystem/Skin/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
@@ -106,99 +155,32 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="FacultyRatingSystem/Skin/dist/js/pages/dashboard.js"></script>
 
+<script>
+  $('.select2UserType').select2();
+</script>
 
 <script type="text/javascript">
-$(document).ready(function () {
-  /*
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  */
-  $('#quickForm').validate({
-    rules: {
-      username: {
-        required: true,
+  $(document).ready(function() {
+    $.ajax({
+      url: '?notification=true',
+      success: function(data){
+        if(data == 'Registered'){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000
+          });
 
-      },
-      password: {
-        required: true,
-        minlength: 3
-      },
-      terms: {
-        required: true
-      },
-    },
-    messages: {
-      username: {
-        required: "Please enter your username"
-
-      },
-      password: {
-        required: "Please provide a password",
-      },
-      terms: "Please accept our terms"
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
+          toastr.success('Registration successful.');
+        }
+      }
+    });
+  })
 </script>
 
 <!-- Show Password plugin JavaScript-->
 <script src="FacultyRatingSystem/Skin/plugins/bootstrap-show-password.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-  $.ajax({
-    url: '?notification=true',
-    success: function(data){
-      if(data == 'InvalidCredentials'){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000
-        });
-
-        toastr.error('Invalid Credentials.');
-      }
-
-      if(data == 'Registered'){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000
-        });
-
-        toastr.success('Registration Successful.');
-      }
-
-      if(data == 'IncompleteCredentials'){
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000
-        });
-
-        toastr.success('Incomplete Credentials.');
-      }
-    }
-  });
-})
-</script>
 
 </body>
 </html>

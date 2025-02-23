@@ -53,6 +53,10 @@
             include 'FacultyRatingSystem/UI/reportFaculty.php';
         }
 
+        public function register($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/register.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -95,6 +99,14 @@
             include 'FacultyRatingSystem/Function/reportAdmin.php';
         }
 
+        public function registerFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/register.php';
+        }
+
+
+        public function logoutFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/logout.php';
+        }
 
         public function loginFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/login.php';
@@ -141,10 +153,6 @@
 
         public function notification($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIParts/notification.php';
-        }
-
-        public function logoutFunction($dbc1, $dbc2) {
-            include 'FacultyRatingSystem/Function/logoutFunction.php';
         }
 
         public function checkMaintenance($dbc1, $dbc2) {
@@ -244,6 +252,8 @@
         $main->reportAdmin($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['reportFaculty'])){
         $main->reportFaculty($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['register'])){
+        $main->register($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -275,6 +285,8 @@
         $main->reportSelected($dbc1, $dbc2);
     }else if(isset($_GET['reportSelectedFaculty'])){
         $main->reportSelectedFaculty($dbc1, $dbc2);
+    }else if(isset($_GET['registerFunction'])){
+        $main->registerFunction($dbc1, $dbc2);
     }
 
     // Dynamics
@@ -295,9 +307,12 @@
         $main->notification($dbc1, $dbc2);
     }
     
-    else{
+    else if(isset($_GET['logoutFunction'])){
+        $main->logoutFunction($dbc1, $dbc2);
+    }else{
         $main->login($dbc1, $dbc2, $queryRepoMain);
     }
+    
 
 
 ?>
