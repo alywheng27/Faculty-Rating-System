@@ -361,6 +361,29 @@
             return $answer;
         }
 
+        function getAdmin($dbc1){
+            $query = "SELECT * FROM user ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $admins = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $admins[$count] = array(
+                    'UserID' => $row['UserID'],
+                    'FirstName' => $row['FirstName'],
+                    'MiddleName' => $row['MiddleName'],
+                    'Surname' => $row['Surname'],
+                    'Username' => $row['Username'],
+                    'Password' => $row['Password'],
+                );
+
+                $count++;
+            }
+
+            return $admins;
+        }
+
         function key(){
             return "KLPR-P*OE-%LED-QA!R-JJFR";
         }

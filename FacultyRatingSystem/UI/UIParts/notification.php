@@ -158,19 +158,19 @@
             unset($_SESSION['IncompleteCredentials']);
         }
 
-        function displayUserAdded(){
-            echo 'UserAdded';
-            unset($_SESSION['UserAdded']);
+        function displayAdminAdded(){
+            echo 'AdminAdded';
+            unset($_SESSION['AdminAdded']);
         }
 
-        function displayUserUpdated(){
-            echo 'UserUpdated';
-            unset($_SESSION['UserUpdated']);
+        function displayAdminUpdated(){
+            echo 'AdminUpdated';
+            unset($_SESSION['AdminUpdated']);
         }
 
-        function displayUserDeleted(){
-            echo 'UserDeleted';
-            unset($_SESSION['UserDeleted']);
+        function displayAdminDeleted(){
+            echo 'AdminDeleted';
+            unset($_SESSION['AdminDeleted']);
         }
     }
 
@@ -304,15 +304,15 @@
         $n->displayIncompleteCredentials();
     }
 
-    if(isset($_SESSION['UserAdded'])){
-        $n->displayUserAdded();
+    if(isset($_SESSION['AdminAdded'])){
+        $n->displayAdminAdded();
     }
 
-    if(isset($_SESSION['UserUpdated'])){
-        $n->displayUserUpdated();
+    if(isset($_SESSION['AdminUpdated'])){
+        $n->displayAdminUpdated();
     }
 
-    if(isset($_SESSION['UserDeleted'])){
-        $n->displayUserDeleted();
+    if(isset($_SESSION['AdminDeleted'])){
+        $n->displayAdminDeleted();
     }
 ?>

@@ -57,6 +57,10 @@
             include 'FacultyRatingSystem/UI/register.php';
         }
 
+        public function admin($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/admin.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -101,6 +105,10 @@
 
         public function registerFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/register.php';
+        }
+
+        public function adminFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/admin.php';
         }
 
 
@@ -254,6 +262,8 @@
         $main->reportFaculty($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['register'])){
         $main->register($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['admin'])){
+        $main->admin($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -287,6 +297,8 @@
         $main->reportSelectedFaculty($dbc1, $dbc2);
     }else if(isset($_GET['registerFunction'])){
         $main->registerFunction($dbc1, $dbc2);
+    }else if(isset($_GET['adminFunction'])){
+        $main->adminFunction($dbc1, $dbc2);
     }
 
     // Dynamics
