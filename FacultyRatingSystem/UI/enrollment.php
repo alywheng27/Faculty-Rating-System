@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Enrollment</h1>
+            <h1 class="m-0 text-dark">Register to Evaluate</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Enrollment</li>
+              <li class="breadcrumb-item active">Register to Evaluate</li>
             </ol>
           </div>
         </div>
@@ -33,15 +33,15 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Enrollment</h3>
+              <h3 class="card-title">Register to Evaluate</h3>
             </div>
             
             <div class="card-body table-responsive">
-              <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#enrollment">Enroll Student</button>
+              <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#enrollment">Register</button>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Student</th>
+                  <th>Rater</th>
                   <th>Class</th>
                   <th>Action</th>
                 </tr>
@@ -51,7 +51,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Student</th>
+                  <th>Rater</th>
                   <th>Class</th>
                   <th>Action</th>
                 </tr>

@@ -61,6 +61,10 @@
             include 'FacultyRatingSystem/UI/admin.php';
         }
 
+        public function supervisor($dbc1, $dbc2, $queryRepoMain) {
+            include 'FacultyRatingSystem/UI/supervisor.php';
+        }
+
         // Functions
 
         public function raterFunction($dbc1, $dbc2) {
@@ -111,6 +115,10 @@
             include 'FacultyRatingSystem/Function/admin.php';
         }
 
+        public function supervisorFunction($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/Function/supervisor.php';
+        }
+
 
         public function logoutFunction($dbc1, $dbc2) {
             include 'FacultyRatingSystem/Function/logout.php';
@@ -157,6 +165,10 @@
 
         public function reportSelectedFaculty($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIDynamics/ReportFaculty/reportSelected.php';
+        }
+
+        public function supervisorSelected($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/Supervisor/supervisorSelected.php';
         }
 
         public function notification($dbc1, $dbc2) {
@@ -264,6 +276,8 @@
         $main->register($dbc1, $dbc2, $queryRepoMain);
     }else if(isset($_GET['admin'])){
         $main->admin($dbc1, $dbc2, $queryRepoMain);
+    }else if(isset($_GET['supervisor'])){
+        $main->supervisor($dbc1, $dbc2, $queryRepoMain);
     }
     
     // Functions
@@ -299,6 +313,10 @@
         $main->registerFunction($dbc1, $dbc2);
     }else if(isset($_GET['adminFunction'])){
         $main->adminFunction($dbc1, $dbc2);
+    }else if(isset($_GET['supervisorFunction'])){
+        $main->supervisorFunction($dbc1, $dbc2);
+    }else if(isset($_GET['supervisorSelected'])){
+        $main->supervisorSelected($dbc1, $dbc2);
     }
 
     // Dynamics

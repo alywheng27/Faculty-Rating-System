@@ -7,7 +7,7 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Enrollment</h4>
+                        <h4 class="modal-title">Registration</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -15,9 +15,9 @@
                     <div class="modal-body">
                         <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?enrollmentFunction=true" method="post">
                         <div class="form-group">
-                            <label for="rater">Student</label>
+                            <label for="rater">Rater</label>
                             <select name="rater" class="form-control select2Rater select2-success" id="rater" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                $raters = $this->getRater($dbc1);
+                                $raters = $this->getRater($dbc1, null);
                                 foreach ($raters as $rater) {
                                     echo '<option value="'.$rater['RaterID'].'">'.$rater['FirstName'].' '.$rater['Surname'].'</option>';
                                 }
@@ -49,7 +49,7 @@
                         <div class="modal-dialog modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title">Update Enrollment</h4>
+                            <h4 class="modal-title">Update Registration</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -57,9 +57,9 @@
                             <div class="modal-body">
                                 <form role="form" id="positionQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?enrollmentFunction=true&updateID='.$enrollment['EnrollmentID'].'" method="post">
                                 <div class="form-group">
-                                    <label for="rater'.$enrollment['EnrollmentID'].'">Student</label>
+                                    <label for="rater'.$enrollment['EnrollmentID'].'">Rater</label>
                                     <select name="rater" class="form-control select2Rater'.$enrollment['EnrollmentID'].' select2-success" id="rater'.$enrollment['EnrollmentID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                        $raters = $this->getRater($dbc1);
+                                        $raters = $this->getRater($dbc1, true);
                                         foreach ($raters as $rater) {
                                             if($rater['RaterID'] == $enrollment['RaterID']) {
                                                 echo '<option value="'.$rater['RaterID'].'" selected>'.$rater['FirstName'].' '.$rater['Surname'].'</option>';
@@ -74,7 +74,11 @@
                                     <select name="class" class="form-control select2Class'.$enrollment['EnrollmentID'].' select2-success" id="class'.$enrollment['EnrollmentID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
                                         $classes = $this->getClass($dbc1, true, null);
                                         foreach ($classes as $class) {
-                                            echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
+                                            if($class['ClassID'] == $enrollment['ClassID']) {
+                                                echo '<option value="'.$class['ClassID'].'" selected>'.$class['Class'].'</option>';
+                                            }else {
+                                                echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
+                                            }
                                         }
                                     echo '</select>
                                 </div>

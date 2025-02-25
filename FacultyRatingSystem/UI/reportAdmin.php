@@ -43,7 +43,7 @@
                     <select name="ratee" class="form-control select2Ratee select2-primary" id="ratee" data-dropdown-css-class="select2-primary" style="width: 100%;">';
                       <option value="" disabled="disabled" selected>Select a Faculty</option>
                       <?php
-                        $ratees = $queryRepoMain->getRatee($dbc1);
+                        $ratees = $queryRepoMain->getRatee($dbc1, null);
                         foreach ($ratees as $ratee) {
                             echo '<option value="'.$ratee['RateeID'].'">'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
                         }
@@ -66,9 +66,8 @@
                     <?php
                       if(isset($_SESSION['RaterID'])){
                         $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
-                        foreach ($enrollments as $enrollment) {
-                          echo '<h4 class="float-right">Student: <strong>'.$enrollment['RaterFirstName'].' '.$enrollment['RaterSurname'].'</strong></h4>';
-                        }
+                        echo '<h4 class="float-right">Student: <strong>'.$enrollments[0]['RaterFirstName'].' '.$enrollments[0]['RaterSurname'].'</strong></h4>';
+                        
                       }else {
                         echo '<h4 class="float-right">Student: <strong>None</strong></h4>';
                       }

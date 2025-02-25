@@ -71,9 +71,19 @@
               <?php
                 $academicYear = $queryRepoMain->getAcademicYear($dbc1, true);
                 $semester = $queryRepoMain->getSemester($dbc1, true);
-
-                echo '<h4>Academic Year: '.$academicYear[0]['AcademicYear'].'</h4>';
-                echo '<h4>Semester: '.$semester[0]['Semester'].' </h4>';
+                
+                if(!empty($academicYear)){
+                  echo '<h4>Academic Year: '.$academicYear[0]['AcademicYear'].'</h4>';
+                }else{
+                  echo '<h4>Academic Year: None</h4>';
+                }
+                if(!empty($semester)){
+                  echo '<h4>Semester: '.$semester[0]['Semester'].' </h4>';
+                }else{
+                  echo '<h4>Semester: None</h4>';
+                }
+                
+                
               ?>
               
             </div>

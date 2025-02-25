@@ -1,7 +1,10 @@
 <?php
     class QueryRepo {
-        function getRater($dbc1){
+        function getRater($dbc1, $nonSupervisor){
             $query = "SELECT * FROM rater JOIN raterType ON rater.raterTypeID = raterType.raterTypeID";
+            if($nonSupervisor){
+                $query .= " WHERE raterType.RaterType != 'Supervisor'";
+            }
             $pdo = $dbc1->prepare($query);
             $pdo->execute();
             
@@ -43,9 +46,15 @@
             return $raterTypes;
         }
 
-        function getRatee($dbc1){
+        function getRatee($dbc1, $rateeID){
             $query = "SELECT * FROM ratee JOIN rateeType ON ratee.rateeTypeID = rateeType.rateeTypeID";
+            if($rateeID != null){
+                $query .= " WHERE ratee.RateeID = :rateeID";
+            }
             $pdo = $dbc1->prepare($query);
+            if($rateeID != null){
+                $pdo->bindParam(':rateeID', $rateeID);
+            }
             $pdo->execute();
             
             $ratees = [];
@@ -325,7 +334,7 @@
         }
 
         function getAnswer($dbc1, $questionID, $raterID, $classID){
-            $query = "SELECT * FROM answer ";
+            $query = "SELECT * FROM answerstudent ";
             if($questionID != null){
                 $query = $query . " WHERE QuestionID = :questionID";
             }

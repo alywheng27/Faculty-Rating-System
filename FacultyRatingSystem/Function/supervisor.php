@@ -1,30 +1,30 @@
 <?php
-    class Evaluation extends QueryRepo{
-        function addEvaluation($dbc1, $evaluations, $raterID, $classID){
+    class Supervisor extends QueryRepo{
+        function addSupervisor($dbc1, $evaluations, $raterID, $rateeID){
             try {
                 $questions = $this->getQuestion($dbc1, null, null);
                 $count = 0;
 
                 foreach ($questions as $question) {
-                    $query = "INSERT INTO answerstudent (Answer, QuestionID, RaterID, ClassID)
-                            VALUES (:evaluation, :questionID, :raterID, :classID) ";
+                    $query = "INSERT INTO answersupervisor (Answer, QuestionID, RaterID, RateeID)
+                            VALUES (:evaluation, :questionID, :raterID, :rateeID) ";
                     $pdo = $dbc1->prepare($query);
-                    $pdo->bindParam(':evaluation', $evaluations[$count]['Evaluation']);
+                    $pdo->bindParam(':evaluation', $evaluations[$count]['Supervisor']);
                     $pdo->bindParam(':questionID', $question['QuestionID']);
                     $pdo->bindParam(':raterID', $raterID);
-                    $pdo->bindParam(':classID', $classID);
+                    $pdo->bindParam(':rateeID', $rateeID);
                     $pdo->execute();
 
                     $count++;
                 }
 
-                $query = "UPDATE enrollment SET HasRated = 1 WHERE RaterID = :raterID AND ClassID = :classID";
+                $query = "UPDATE enrollment SET HasRated = 1 WHERE RaterID = :raterID AND RateeID = :rateeID";
                 $pdo = $dbc1->prepare($query);
                 $pdo->bindParam(':raterID', $raterID);
-                $pdo->bindParam(':classID', $classID);
+                $pdo->bindParam(':rateeID', $rateeID);
                 $pdo->execute();
 
-                $_SESSION['EvaluationAdded'] = true;
+                $_SESSION['SupervisorAdded'] = true;
                 unset($_SESSION['EnrollmentID']);
             } catch (\Throwable $th) {
                 echo 'Error: '.$th->getMessage();
@@ -32,11 +32,10 @@
         }
     }
 
-    $e = new Evaluation();
+    $e = new Supervisor();
 
     $raterID = $_SESSION['id'];
-    $enrollments = $e->getEnrollment($dbc1, null, $_SESSION['EnrollmentID'], null, null);
-    $classID = $enrollments[0]['ClassID'];
+    $rateeID = $_SESSION['RateeID'];
 
     $categories = $e->getCategory($dbc1, null);
     $evaluations = [];
@@ -45,14 +44,14 @@
         $questions = $e->getQuestion($dbc1, $category['CategoryID'], NULL);
         foreach ($questions as $question) {
             $evaluations[$count] = array(
-                'Evaluation' => $_POST['answer'.$category['CategoryID'].'-'.$question['QuestionID']],
+                'Supervisor' => $_POST['answer'.$category['CategoryID'].'-'.$question['QuestionID']],
             );
 
             $count++;
         }
     }
 
-    $e->addEvaluation($dbc1, $evaluations, $raterID, $classID);
+    $e->addSupervisor($dbc1, $evaluations, $raterID, $rateeID);
     
-    header('Location: ?evaluation=true');
+    header('Location: ?supervisor=true');
 ?>

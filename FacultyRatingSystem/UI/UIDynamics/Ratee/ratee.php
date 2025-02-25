@@ -1,7 +1,7 @@
 <?php
     class Ratee extends QueryRepo{
         function displayRatee($dbc1){
-            $ratees = $this->getRatee($dbc1, NULL);
+            $ratees = $this->getRatee($dbc1, null);
 
             foreach ($ratees as $ratee) {
                 echo '

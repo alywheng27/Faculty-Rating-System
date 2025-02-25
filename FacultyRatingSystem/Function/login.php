@@ -17,7 +17,7 @@
         }
 
         function loginRater($dbc1, $username, $password){
-            $query = "SELECT COUNT(*) AS Count, RaterID, FirstName FROM Rater 
+            $query = "SELECT COUNT(*) AS Count, RaterID, FirstName, RaterTypeID FROM Rater 
                 WHERE RaterIDNumber = :username AND Password = :password ";
             $pdo = $dbc1->prepare($query);
             $pdo->bindParam(':username', $username);
@@ -71,6 +71,12 @@
         $row = $login->loginRater($dbc1, $username, $password);
 
         if($row['Count'] > 0){
+            // if($row['RaterTypeID'] == 1){
+            //     header('Location: ?evaluation=true');
+            // }else if($row['RaterTypeID'] == 2){
+            //     header('Location: ?supervisor=true');
+            // }
+            
             header('Location: ?evaluation=true');
             $_SESSION['UserType'] = 'Rater';
             exit();

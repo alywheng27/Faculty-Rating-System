@@ -17,12 +17,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Report</h1>
+            <h1 class="m-0 text-dark">Evaluation</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Report</li>
+              <li class="breadcrumb-item active">Evaluation</li>
             </ol>
           </div>
         </div>
@@ -33,49 +33,47 @@
       <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Report</h3>
+              <h3 class="card-title">Evaluation</h3>
             </div>
             
             <div class="card-body table-responsive">
-              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?reportSelectedFaculty=true" method="post">
+              <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?supervisorSelected=true" method="post">
                 <div class="row">
-                  <div class="col-md-2">
-                    <select name="class" class="form-control select2Class select2-primary" id="class" data-dropdown-css-class="select2-primary" style="width: 100%;">';
-                      <option value="" disabled="disabled" selected>Select a Class</option>
+                  <div class="col-md-4">
+                    <select name="ratee" class="form-control select2Ratee select2-primary" id="ratee" data-dropdown-css-class="select2-primary" style="width: 100%;">';
                       <?php
-                        $rateeID = $_SESSION['id'];
-                        $classes = $queryRepoMain->getClass($dbc1, true, $rateeID);
-                        foreach ($classes as $class) {
-                          echo '<option value="'.$class['ClassID'].'">'.$class['Class'].'</option>';
+                        $ratees = $queryRepoMain->getRatee($dbc1, null);
+                        foreach ($ratees as $ratee) {
+                            echo '<option value="'.$ratee['RateeID'].'">'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
                         }
-                      ?>
+                        ?>
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <select name="rater" class="form-control select2Rater select2-primary" id="rater" data-dropdown-css-class="select2-primary" style="width: 100%;">';
-                    </select>
-                  </div>
-                  <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setReport">Generate Report</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-3 mr-2" id="setEvaluation">Select Faculty</button>
                   </div>
               </form>
                   <div class="col-md-6">
                     <?php
-                      if(isset($_SESSION['RaterID'])){
-                        $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
-                        echo '<h4 class="float-right">Student: <strong>'.$enrollments[0]['RaterFirstName'].' '.$enrollments[0]['RaterSurname'].'</strong></h4>';
+                      if(isset($_SESSION['RateeID'])){
+                        $ratees = $queryRepoMain->getRatee($dbc1, $_SESSION['RateeID']);
+                        foreach ($ratees as $ratee) {
+                          echo '<h4 class="float-right">Faculty: <strong>'.$ratee['FirstName'].' '.$ratee['Surname'].'</strong></h4>';
+                        }
                       }else {
-                        echo '<h4 class="float-right">Student: <strong>None</strong></h4>';
+                        echo '<h4 class="float-right">Faculty: <strong>None</strong></h4>';
                       }
                     ?>
                   </div>
                 </div>
-              
-                <?php 
-                  if(isset($_SESSION['RaterID'])){
-                    include 'FacultyRatingSystem/UI/UIDynamics/ReportFaculty/report.php'; 
-                  }
-                ?>
+                <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?supervisorFunction=true" method="post">
+                  <?php include 'FacultyRatingSystem/UI/UIDynamics/Supervisor/supervisor.php'; ?>
+                  <?php
+                    if(isset($_SESSION['RateeID'])){
+                      echo '<button type="submit" class="btn btn-success mb-3 float-right mr-2" id="setEvaluation">Submit Evaluation</button>';
+                    }
+                  ?>
+                </form>
             </div>
           </div>
       </div>
@@ -93,6 +91,7 @@
 </div>
 
 <?php include 'FacultyRatingSystem/UI/UIParts/modal.php' ?>
+
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
@@ -134,8 +133,6 @@
 <script>
   //Initialize Select2 Elements
   $('.select2Ratee').select2();
-  $('.select2Class').select2();
-  $('.select2Rater').select2();
 
   //Initialize Select2 Elements
   $('.select2bs4').select2({
@@ -143,18 +140,24 @@
   })
 </script>
 
-<script>
-  $("#class").change(function(){
-    var classID = $(this).val();
+<script type="text/javascript">
     $.ajax({
-      type: "post",
-      url: '?raterReportFaculty=true',
-      data: {classID: classID},
+      type: "get",
+      url: '?notification=true',
       success: function(data){
-        document.getElementById("rater").innerHTML = data;
+        if(data == 'EvaluationAdded'){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          toastr.success('Evaluation Added.');
+        }
+
       }
     });
-  })
 </script>
 
 </body>

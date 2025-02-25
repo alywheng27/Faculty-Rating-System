@@ -62,11 +62,11 @@
                     <p>Question</p>
                 </a>
             </li>
-            <li class="nav-header">ENROLLMENT AND RESULT</li>
+            <li class="nav-header">REGISTRATION AND REPORT</li>
             <li class="nav-item">
                 <a href="?enrollment=true" class="nav-link">
                     <i class="fas fa-registered nav-icon"></i>
-                    <p>Enrollment</p>
+                    <p>Register</p>
                 </a>
             </li>
             <li class="nav-item">

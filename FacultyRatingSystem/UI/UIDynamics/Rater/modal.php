@@ -1,7 +1,7 @@
 <?php
     class RaterModal extends QueryRepo{
         function displayRater($dbc1){
-            $raters = $this->getRater($dbc1);
+            $raters = $this->getRater($dbc1, null);
             echo '
             <div class="modal fade" id="rater">
                 <div class="modal-dialog modal-md">

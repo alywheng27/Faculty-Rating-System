@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="faculty">Faculty</label>
                             <select name="faculty" class="form-control select2Faculty select2-success" id="faculty" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                $ratees = $this->getRatee($dbc1);
+                                $ratees = $this->getRatee($dbc1, null);
                                 foreach ($ratees as $ratee) {
                                     echo '<option value="'.$ratee['RateeID'].'">'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
                                 }
@@ -98,7 +98,7 @@
                                     <div class="form-group">
                                         <label for="faculty'.$class['ClassID'].'">Faculty</label>
                                         <select name="faculty" class="form-control select2Faculty'.$class['ClassID'].' select2-success" id="faculty'.$class['ClassID'].'" data-dropdown-css-class="select2-success" style="width: 100%;">';
-                                            $ratees = $this->getRatee($dbc1);
+                                            $ratees = $this->getRatee($dbc1, null);
                                             foreach ($ratees as $ratee) {
                                                 if($ratee['RateeID'] == $class['RateeID']) {
                                                     echo '<option value="'.$ratee['RateeID'].'" selected>'.$ratee['FirstName'].' '.$ratee['Surname'].'</option>';
