@@ -393,6 +393,31 @@
             return $admins;
         }
 
+        function getTableTotalRowCount($dbc1) {
+            $query = "SELECT * FROM tablestotalrowcountview ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $total = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $total[$count] = array(
+                    'RaterCount' => $row['RaterCount'],
+                    'RateeCount' => $row['RateeCount'],
+                    'SubjectCount' => $row['SubjectCount'],
+                    'ClassCount' => $row['ClassCount'],
+                    'CategoryCount' => $row['CategoryCount'],
+                    'QuestionCount' => $row['QuestionCount'],
+                    'EnrollmentCount' => $row['EnrollmentCount'],
+                    'UserCount' => $row['UserCount'],
+                );
+
+                $count++;
+            }
+
+            return $total;
+        }
+
         function key(){
             return "KLPR-P*OE-%LED-QA!R-JJFR";
         }

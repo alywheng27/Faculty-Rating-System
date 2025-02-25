@@ -171,6 +171,10 @@
             include 'FacultyRatingSystem/UI/UIDynamics/Supervisor/supervisorSelected.php';
         }
 
+        public function tableTotalRowCount($dbc1, $dbc2) {
+            include 'FacultyRatingSystem/UI/UIDynamics/tableTotalRowCount.php';
+        }
+
         public function notification($dbc1, $dbc2) {
             include 'FacultyRatingSystem/UI/UIParts/notification.php';
         }
@@ -330,6 +334,8 @@
         $main->raterReport($dbc1, $dbc2);
     }else if(isset($_GET['raterReportFaculty'])){
         $main->raterReportFaculty($dbc1, $dbc2);
+    }else if(isset($_GET['tableTotalRowCount'])){
+        $main->tableTotalRowCount($dbc1, $dbc2);
     }
 
     // Parts
