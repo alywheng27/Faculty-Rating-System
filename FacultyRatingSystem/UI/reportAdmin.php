@@ -67,17 +67,66 @@
                       if(isset($_SESSION['RaterID'])){
                         $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
                         echo '<h4 class="float-right">Student: <strong>'.$enrollments[0]['RaterFirstName'].' '.$enrollments[0]['RaterSurname'].'</strong></h4>';
-                        
                       }else {
                         echo '<h4 class="float-right">Student: <strong>None</strong></h4>';
                       }
                     ?>
                   </div>
                 </div>
-              
-                <?php 
+                <div id="printable">
+                  <?php
+                    if(isset($_SESSION['RaterID'])){
+                      echo '<h2 class="text-center mt-3">Evaluation Report</h2>';
+                      echo '<hr>';
+                    }
+                  ?>
+                  <table>
+                    <?php
+                      if(isset($_SESSION['RaterID'])){
+                        $academicYear = $queryRepoMain->getAcademicYear($dbc1, true);
+                        $semester = $queryRepoMain->getSemester($dbc1, true);
+                        
+                        $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
+                        echo '<tr>';
+                        echo '<td width="80%" class="">Student: <strong>'.$enrollments[0]['RaterFirstName'].' '.$enrollments[0]['RaterSurname'].'</strong></td>';
+                        if(!empty($academicYear)){
+                          echo '<td>Academic Year: '.$academicYear[0]['AcademicYear'].'</td>';
+                        }
+                        echo '</tr>';
+
+                        echo '<tr>';
+                        echo '<td class="">Faculty: <strong>'.$enrollments[0]['RateeFirstName'].' '.$enrollments[0]['RateeSurname'].'</strong></td>';
+                        if(!empty($semester)){
+                          echo '<td>Semester: '.$semester[0]['Semester'].' </td>';
+                        }
+                        echo '</tr>';
+
+                        echo '<tr>';
+                        echo '<td class="">Class: <strong>'.$enrollments[0]['Class'].'</strong></td>';
+                        echo '</tr>';
+                      }                 
+                    ?>
+                  </table>
+                  <?php
+                      if(isset($_SESSION['RaterID'])){
+                        echo '
+                          <fieldset class="border border-info p-2 w-100 mt-3">
+                            <legend  class="w-auto">Rating Legend</legend>
+                            <p>5 = Strongly Agree, 4 = Agree, 3 = Uncertain, 2 = Disagree, 1 = Strongly Disagree</p>
+                          </fieldset>
+                        ';
+                      }
+                  ?> 
+                  <?php 
+                    if(isset($_SESSION['RaterID'])){
+                      include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/report.php'; 
+                    }
+                  ?>
+                  
+                </div>
+                <?php
                   if(isset($_SESSION['RaterID'])){
-                    include 'FacultyRatingSystem/UI/UIDynamics/ReportAdmin/report.php'; 
+                    echo '<button type="button" class="btn btn-success mr-2 float-right mt-3" id="print-btn">&nbsp;&nbsp;Print&nbsp;&nbsp;</button>';
                   }
                 ?>
             </div>
@@ -148,6 +197,52 @@
 </script>
 
 <script>
+  $(function () {
+    $('#example1').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": true,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+
+  $(function () {
+    $('#example2').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": true,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+
+  $(function () {
+    $('#example3').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": true,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+
+  $(function () {
+    $('#example4').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": true,
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+
+<script>
   $("#ratee").change(function(){
     var rateeID = $(this).val();
     $.ajax({
@@ -172,6 +267,52 @@
       }
     });
   })
+</script>
+
+<noscript>
+	<style>
+		table{
+			width:100%;
+			border-collapse: collapse;
+		}
+		table tr,table td,table th{
+			border:1px solid gray;
+			padding: 3px
+		}
+
+    .float-right {
+      float: right;
+    }
+		table thead tr{
+			background: #6c757d linear-gradient(180deg,#828a91,#6c757d) repeat-x!important;
+    		color: #fff;
+		}
+		.text-center{
+			text-align:center;
+		} 
+		.text-right{
+			text-align:right;
+		} 
+		.text-left{
+			text-align:left;
+		}
+
+    .mt-3 {
+      margin-top: 1.5rem;
+    }
+	</style>
+</noscript>
+
+<script>
+  $('#print-btn').click(function(){
+		var ns =$('noscript').clone()
+		var content = $('#printable').html()
+		ns.append(content)
+		var nw = window.open("Report","_blank","width=900,height=700")
+		nw.document.write(ns.html())
+		nw.document.close()
+		nw.print()
+	})
 </script>
 
 </body>
