@@ -8,6 +8,7 @@
                     <tr>
                         <td>'.$ratee['RateeIDNumber'].'</td>
                         <td>'.$ratee['FirstName'].' '.$ratee['Surname'].'</td>
+                        <td>'.$ratee['AcademicRank'].'</td>
                         <td>'.$ratee['RateeType'].'</td>
                         <td style="display: flex; column-gap: 5px;">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit'.$ratee['RateeID'].'"><i class="fas fa-edit nav-icon"></i><span class="ml-2 editButton">Edit</span></button>

@@ -31,6 +31,10 @@
                             <input type="text" name="surname" id="surname" class="form-control" placeholder="Last Name" autocomplete="off">
                         </div>
                         <div class="form-group">
+                            <label for="acaemicRank">Academic Rank</label>
+                            <input type="text" name="acaemicRank" id="acaemicRank" class="form-control" placeholder="Academic Rank" autocomplete="off">
+                        </div>
+                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off">
                         </div>
@@ -73,6 +77,10 @@
                                     <div class="form-group">
                                         <label for="surname">Last Name</label>
                                         <input type="text" name="surname" value="'.$ratee['Surname'].'" id="surname" class="form-control" placeholder="Surname" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="academicRank">Academic Rank</label>
+                                        <input type="text" name="academicRank" value="'.$ratee['AcademicRank'].'" id="academicRank" class="form-control" placeholder="Academic Rank" autocomplete="off">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>

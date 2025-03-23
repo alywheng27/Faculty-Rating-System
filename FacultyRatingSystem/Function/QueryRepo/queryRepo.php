@@ -66,6 +66,7 @@
                     'FirstName' => $row['FirstName'],
                     'MiddleName' => $row['MiddleName'],
                     'Surname' => $row['Surname'],
+                    'AcademicRank' => $row['AcademicRank'],
                     'RateeType' => $row['RateeType'],
                     'Password' => $row['Password'],
                 );

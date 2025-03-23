@@ -43,6 +43,7 @@
                 <tr>
                   <th>ID Number</th>
                   <th>Name</th>
+                  <th>Academic Rank</th>
                   <th>Ratee Type</th>
                   <th>Action</th>
                 </tr>
@@ -54,6 +55,7 @@
                 <tr>
                   <th>ID Number</th>
                   <th>Name</th>
+                  <th>Academic Rank</th>
                   <th>Ratee Type</th>
                   <th>Action</th>
                 </tr>
