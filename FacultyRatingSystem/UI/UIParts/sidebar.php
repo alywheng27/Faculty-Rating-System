@@ -2,7 +2,7 @@
     <a href="index.php" class="brand-link mb-4">
         <img src="FacultyRatingSystem/Skin/dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light" style="font-size: clamp(1rem, 1.15rem, 1.25rem)">Faculty Rating System</span>
+        <span class="brand-text font-weight-light" style="font-size: clamp(1rem, 1.15rem, 1.25rem)">Faculty Evaluation</span>
     </a>
 
     <div class="sidebar">

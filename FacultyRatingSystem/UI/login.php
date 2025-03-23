@@ -9,7 +9,7 @@
 <div class="login-box">
   <div class="card card-outline card-success">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Faculty Evaluation System</b></a>
+      <a href="" class="h1"><b>Online Faculty Evaluation for Teaching Effectiveness in CCS</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
