@@ -45,35 +45,35 @@
                                     <div class="row text-center">
                                         <div class="offset-md-2 col-md-2">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="5" id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-1">
+                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="5" required id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-1">
                                                 <label for="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-1">
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="4" id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-2">
+                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="4" required id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-2">
                                                 <label for="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-2">
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="3" id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-3">
+                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="3" required id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-3">
                                                 <label for="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-3">
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="2" id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-4">
+                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="2" required id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-4">
                                                 <label for="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-4">
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="1" checked id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-5">
+                                                <input type="radio" name="answer'.$category['CategoryID'].'-'.$question['QuestionID'].'" value="1" required id="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-5">
                                                 <label for="radioSuccess'.$category['CategoryID'].'-'.$question['QuestionID'].'-5">
                                                 </label>
                                             </div>
