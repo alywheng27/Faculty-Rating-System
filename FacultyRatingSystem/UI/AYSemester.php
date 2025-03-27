@@ -143,6 +143,29 @@
                     </div>
                 </div>
             </div>
+                <?php
+                  $ratingPeriod = $queryRepoMain->getRatingPeriod($dbc1);
+                ?>
+              <div class="offset-6 col-md-2">
+                <form role="form" id="userQuickForm" class="form-horizontal" enctype="multipart/form-data" action="?AYSemesterFunction=true&type=period" method="post">
+                <div class="form-group">
+                  <label for="ratingPeriodFrom">From</label>
+                  <input type="datetime-local" name="ratingPeriodFrom" value="<?php echo $ratingPeriod[0]['FromRatingPeriod']; ?>" id="ratingPeriodFrom" class="form-control" autocomplete="off" required>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="ratingPeriodTo">To</label>
+                  <input type="datetime-local" name="ratingPeriodTo" value="<?php echo $ratingPeriod[0]['ToRatingPeriod']; ?>" id="ratingPeriodTo" class="form-control" autocomplete="off" required>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="ratingPeriod">&nbsp;</label>
+                  <button type="submit" class="btn btn-success btn-block">Set Rating Period</button>
+                </div>
+                </form>
+              </div>
         </div>
         
       </div>
@@ -315,6 +338,17 @@
           });
 
           toastr.success('AcademicYear And Semester has been set.');
+        }
+
+        if(data == 'RatingPeriodSet'){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          toastr.success('Rating Period has been set.');
         }
 
       }

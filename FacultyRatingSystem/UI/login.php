@@ -9,7 +9,7 @@
 <div class="login-box">
   <div class="card card-outline card-success">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Online Faculty Evaluation for Teaching Effectiveness in CCS</b></a>
+      <a href="" class="h1"><b>Online Faculty Evaluation for Teaching Effectiveness in ICS</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -194,6 +194,17 @@ $(document).ready(function() {
         });
 
         toastr.success('Incomplete Credentials.');
+      }
+
+      if(data == 'RatingPeriodProblem'){
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 3000
+        });
+
+        toastr.error('The evaluation period is either over or not started.');
       }
     }
   });

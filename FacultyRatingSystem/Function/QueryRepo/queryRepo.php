@@ -275,7 +275,7 @@
             $query = "SELECT EnrollmentID, enrollment.RaterID as RaterID, class.RateeID as RateeID, 
                         rater.FirstName as RaterFirstName, rater.MiddleName as RaterMiddleName, rater.Surname as RaterSurname, 
                         ratee.FirstName as RateeFirstName, ratee.MiddleName as RateeMiddleName, ratee.Surname as RateeSurname, 
-                        class.ClassID as ClassID, class.Class as Class 
+                        class.ClassID as ClassID, class.Class as Class, AcademicRank  
                         FROM enrollment
                         JOIN rater ON rater.RaterID = enrollment.RaterID 
                         JOIN class ON class.ClassID = enrollment.ClassID
@@ -326,6 +326,7 @@
                     'RateeSurname' => $row['RateeSurname'],
                     'ClassID' => $row['ClassID'],
                     'Class' => $row['Class'],
+                    'AcademicRank' => $row['AcademicRank'],
                 );
 
                 $count++;
@@ -392,6 +393,26 @@
             }
 
             return $admins;
+        }
+
+        function getRatingPeriod($dbc1){
+            $query = "SELECT * FROM ratingperiod WHERE ID = 1 ";
+            $pdo = $dbc1->prepare($query);
+            $pdo->execute();
+            
+            $ratingPeriod = [];
+            $count = 0;
+            while($row = $pdo->fetch(PDO::FETCH_ASSOC)){
+                $ratingPeriod[$count] = array(
+                    'ID' => $row['ID'],
+                    'FromRatingPeriod' => $row['FromRatingPeriod'],
+                    'ToRatingPeriod' => $row['ToRatingPeriod'],
+                );
+
+                $count++;
+            }
+
+            return $ratingPeriod;
         }
 
         function getTableTotalRowCount($dbc1) {

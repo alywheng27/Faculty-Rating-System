@@ -76,10 +76,19 @@
             // }else if($row['RaterTypeID'] == 2){
             //     header('Location: ?supervisor=true');
             // }
+
+            $date = date('Y-m-d').'T'.date('H:i');
+            $ratingPeriod = $login->getRatingPeriod($dbc1);
             
-            header('Location: ?evaluation=true');
-            $_SESSION['UserType'] = 'Rater';
-            exit();
+            if($ratingPeriod[0]['FromRatingPeriod'] <= $date AND $ratingPeriod[0]['ToRatingPeriod'] >= $date){
+                header('Location: ?evaluation=true');
+                $_SESSION['UserType'] = 'Rater';
+                exit();
+            }else {
+                $_SESSION['RatingPeriodProblem'] = true;
+                header('Location: index.php');
+                exit();
+            }
         }
 
         $row = $login->loginRatee($dbc1, $username, $password);

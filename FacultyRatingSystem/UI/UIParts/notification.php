@@ -64,6 +64,16 @@
             echo 'AYSemesterSet';
             unset($_SESSION['AYSemesterSet']);
         }
+        
+        function displayRatingPeriodSet(){
+            echo 'RatingPeriodSet';
+            unset($_SESSION['RatingPeriodSet']);
+        }
+
+        function displayRatingPeriodProblem(){
+            echo 'RatingPeriodProblem';
+            unset($_SESSION['RatingPeriodProblem']);
+        }
 
         function displayCategoryAdded(){
             echo 'CategoryAdded';
@@ -238,6 +248,14 @@
 
     if(isset($_SESSION['AYSemesterSet'])){
         $n->displayAYSemesterSet();
+    }
+
+    if(isset($_SESSION['RatingPeriodSet'])){
+        $n->displayRatingPeriodSet();
+    }
+
+    if(isset($_SESSION['RatingPeriodProblem'])){
+        $n->displayRatingPeriodProblem();
     }
 
     if(isset($_SESSION['CategoryAdded'])){

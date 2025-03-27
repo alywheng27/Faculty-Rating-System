@@ -79,6 +79,20 @@
                 echo 'Error: '.$th->getMessage();
             }
         }
+
+        function setRatingPeriod($dbc1, $ratingPeriodFrom, $ratingPeriodTo){
+            try {
+                $query = "UPDATE ratingperiod SET FromRatingPeriod = :ratingPeriodFrom, ToRatingPeriod = :ratingPeriodTo WHERE ID = 1 ";
+                $pdo = $dbc1->prepare($query);
+                $pdo->bindParam(':ratingPeriodFrom', $ratingPeriodFrom);
+                $pdo->bindParam(':ratingPeriodTo', $ratingPeriodTo);
+                $pdo->execute();
+
+                $_SESSION['RatingPeriodSet'] = true;
+            } catch (\Throwable $th) {
+                echo 'Error: '.$th->getMessage();
+            }
+        }
     }
 
     $r = new AYSemester();
@@ -97,6 +111,11 @@
         $sem = $_POST['sem'];
 
         $r->set($dbc1, $year, $sem);
+    }else if($_GET['type'] == 'period'){
+        $ratingPeriodFrom = $_POST['ratingPeriodFrom'];
+        $ratingPeriodTo = $_POST['ratingPeriodTo'];
+
+        $r->setRatingPeriod($dbc1, $ratingPeriodFrom, $ratingPeriodTo);
     }else if(isset($_GET['updateID'])){
         $updateID = $_GET['updateID'];
         $r->update($dbc1, $data, $type, $updateID);

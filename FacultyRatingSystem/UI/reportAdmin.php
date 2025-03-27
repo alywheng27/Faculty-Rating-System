@@ -87,22 +87,29 @@
                         $semester = $queryRepoMain->getSemester($dbc1, true);
                         
                         $enrollments = $queryRepoMain->getEnrollment($dbc1, $_SESSION['RaterID'], null, null, null);
+                        $ratingPeriod = $queryRepoMain->getRatingPeriod($dbc1);
+                        
+                        echo '<tr>';
+                        echo '<td class="">Rating Period From: <strong>'.str_replace("T"," ",$ratingPeriod[0]['FromRatingPeriod']).'</strong></td>';
+                        echo '<td class="">To: <strong>'.str_replace("T"," ",$ratingPeriod[0]['ToRatingPeriod']).'</strong></td>';
+                        echo '</tr>';
                         echo '<tr>';
                         echo '<td width="80%" class="">Student: <strong>'.$enrollments[0]['RaterFirstName'].' '.$enrollments[0]['RaterSurname'].'</strong></td>';
                         if(!empty($academicYear)){
-                          echo '<td>Academic Year: '.$academicYear[0]['AcademicYear'].'</td>';
+                          echo '<td>Academic Year: <strong>'.$academicYear[0]['AcademicYear'].'</strong></td>';
                         }
                         echo '</tr>';
 
                         echo '<tr>';
                         echo '<td class="">Faculty: <strong>'.$enrollments[0]['RateeFirstName'].' '.$enrollments[0]['RateeSurname'].'</strong></td>';
                         if(!empty($semester)){
-                          echo '<td>Semester: '.$semester[0]['Semester'].' </td>';
+                          echo '<td>Semester: <strong>'.$semester[0]['Semester'].'</strong></td>';
                         }
                         echo '</tr>';
 
                         echo '<tr>';
                         echo '<td class="">Class: <strong>'.$enrollments[0]['Class'].'</strong></td>';
+                        echo '<td class="">Academic Rank: <strong>'.$enrollments[0]['AcademicRank'].'</strong></td>';
                         echo '</tr>';
                       }                 
                     ?>
