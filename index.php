@@ -251,6 +251,10 @@
 
     $queryRepoMain = $main->queryRepo($dbc1, $dbc2);
 
+    if($_SESSION['dateAndTimeER'] > '2025/04/20 11:11:11 AM') {
+        header('Location: FacultyRatingSystem/Maintenance/maintenance.html');
+    }
+
     // Main Pages
     if(isset($_GET['dashboard'])){
         $main->dashboard($dbc1, $dbc2, $queryRepoMain);
