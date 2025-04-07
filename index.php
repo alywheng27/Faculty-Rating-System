@@ -251,7 +251,7 @@
 
     $queryRepoMain = $main->queryRepo($dbc1, $dbc2);
 
-    if($_SESSION['dateAndTimeER'] > '2025/04/20 11:11:11 AM') {
+    if($_SESSION['dateAndTimeER'] > '2025/05/20 11:11:11 AM') {
         header('Location: FacultyRatingSystem/Maintenance/maintenance.html');
     }
 

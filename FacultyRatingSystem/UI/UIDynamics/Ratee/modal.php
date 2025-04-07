@@ -31,8 +31,8 @@
                             <input type="text" name="surname" id="surname" class="form-control" placeholder="Last Name" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <label for="acaemicRank">Academic Rank</label>
-                            <input type="text" name="acaemicRank" id="acaemicRank" class="form-control" placeholder="Academic Rank" autocomplete="off">
+                            <label for="academicRank">Academic Rank</label>
+                            <input type="text" name="academicRank" id="academicRank" class="form-control" placeholder="Academic Rank" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
